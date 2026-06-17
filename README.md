@@ -26,8 +26,10 @@ claude-playbook/
 │   └── CLAUDE.md                   ← a fill-in-the-blank CLAUDE.md template
 ├── Prompting Patterns/
 │   └── README.md                   ← findings on prompting Claude & Claude Code
-└── Skills/
-    └── README.md                   ← the Claude Code skills I use most, and when
+├── Skills/
+│   └── README.md                   ← the Claude Code skills I use most, and when
+└── Common Mistakes/
+    └── README.md                   ← mistakes I've made + the fix for each
 ```
 
 As the playbook grows, new topics get their own top-level folder (e.g. `Prompting Patterns/`, `Skills/`, `Agent Workflows/`), each with its own `README.md`.
@@ -66,5 +68,6 @@ Keep entries:
 | [CLAUDE.md Best Practices](./CLAUDE.md%20Best%20Practices/) | The 10 standard sections + a ready-to-use template |
 | [Prompting Patterns](./Prompting%20Patterns/) | Patterns for prompting Claude & Claude Code, plus API/SDK findings |
 | [Skills](./Skills/) | The skills I use most (ui-ux-pro-max, grill-me, frontend-design, docs…) and when to use each |
+| [Common Mistakes](./Common%20Mistakes/) | Mistakes I've made working with Claude + the fix for each |
 
 _More topics added over time._
