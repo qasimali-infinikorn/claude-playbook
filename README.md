@@ -33,6 +33,7 @@ claude-playbook/
 │   # Working well
 ├── Prompting Patterns/             ← how to prompt for reliable results
 ├── Skills/                         ← the skills I use most, and when
+├── Design Process/                 ← the 7-stage "real design process" for building UIs
 ├── Common Mistakes/                ← mistakes + the fix for each
 │
 │   # Doing it safely
@@ -87,6 +88,7 @@ Keep entries:
 | **Working well** | |
 | [Prompting Patterns](./Prompting%20Patterns/) | Patterns for prompting Claude & Claude Code, plus API/SDK findings |
 | [Skills](./Skills/) | The skills I use most (ui-ux-pro-max, grill-me, frontend-design, docs…) and when to use each |
+| [Design Process](./Design%20Process/) | The 7-stage "real design process" (grill → brief → IA → tokens → tasks → build → review) for building UIs intentionally |
 | [Common Mistakes](./Common%20Mistakes/) | Mistakes I've made working with Claude + the fix for each |
 | **Doing it safely** | |
 | [Git & PR Workflow](./Git%20and%20PR%20Workflow/) | Branch, review the diff, commit, open a PR — without footguns |
