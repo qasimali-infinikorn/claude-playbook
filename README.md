@@ -42,6 +42,7 @@ claude-playbook/
 │
 │   # Setting up projects
 ├── CLAUDE.md Best Practices/       ← the 10 standard sections + a fill-in template
+├── Claude Directory Layout/        ← the .claude/ tree: agents, commands, hooks, settings.json
 └── Project Setup Checklist/        ← make a new project agent-ready
 ```
 
@@ -93,6 +94,7 @@ Keep entries:
 | [Troubleshooting & FAQ](./Troubleshooting%20and%20FAQ/) | Common "it's not working" situations and their fixes |
 | **Setting up projects** | |
 | [CLAUDE.md Best Practices](./CLAUDE.md%20Best%20Practices/) | The 10 standard sections + a ready-to-use template |
+| [Claude Directory Layout](./Claude%20Directory%20Layout/) | The `.claude/` tree explained: agents, commands, hooks, skills, settings.json — with verified field names |
 | [Project Setup Checklist](./Project%20Setup%20Checklist/) | Steps to make a new project agent-ready from the first prompt |
 
 _More topics added over time._
