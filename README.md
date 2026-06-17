@@ -21,9 +21,11 @@ Working with an AI coding agent gets dramatically better when the project gives 
 ```
 claude-playbook/
 ├── README.md                       ← you are here
-└── CLAUDE.md Best Practices/
-    ├── README.md                   ← how to write a great CLAUDE.md (the 10 standard sections)
-    └── CLAUDE.md                   ← a fill-in-the-blank CLAUDE.md template
+├── CLAUDE.md Best Practices/
+│   ├── README.md                   ← how to write a great CLAUDE.md (the 10 standard sections)
+│   └── CLAUDE.md                   ← a fill-in-the-blank CLAUDE.md template
+└── Prompting Patterns/
+    └── README.md                   ← findings on prompting Claude & Claude Code
 ```
 
 As the playbook grows, new topics get their own top-level folder (e.g. `Prompting Patterns/`, `Skills/`, `Agent Workflows/`), each with its own `README.md`.
@@ -60,5 +62,6 @@ Keep entries:
 | Topic | What's inside |
 |---|---|
 | [CLAUDE.md Best Practices](./CLAUDE.md%20Best%20Practices/) | The 10 standard sections + a ready-to-use template |
+| [Prompting Patterns](./Prompting%20Patterns/) | Patterns for prompting Claude & Claude Code, plus API/SDK findings |
 
 _More topics added over time._
