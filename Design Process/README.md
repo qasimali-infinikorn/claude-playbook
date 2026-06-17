@@ -1,5 +1,7 @@
 # Real Design Process
 
+![Designer Skills — Claude Code, Cursor, GitHub Copilot](./design_skills_hero.png)
+
 How to run a **professional design process inside the terminal** — instead of asking Claude to "build me a nice UI" and hoping. The idea: don't skip the steps a designer would actually take. Each step produces a document that feeds the next, so by the time code gets written, the agent already knows *what* it's building, *for whom*, and *why*.
 
 > The core insight, from Julian Oczkowski's write-up of his designer-skills set: **"Speed without direction just means you waste time faster."** AI lets you generate a UI in seconds — but without process, judgment, and accountability you just generate the *wrong* UI faster. ([source article](https://medium.com/@julian.oczkowski/7-claude-code-design-skills-that-follow-a-real-design-process-b871b8673d05))
@@ -75,13 +77,28 @@ You don't need a separate plugin to follow this process — most stages map onto
 | 6 Build | `frontend-design`, `ui-ux-pro-max`, `landing` |
 | 7 Review | `verify`, `code-review`, `simplify`, Playwright MCP screenshots |
 
-If you want the dedicated, opinionated version, the original set installs with:
+### The dedicated skill set (vendored here)
+
+If you want the opinionated, ready-made version, the original `designer-skills` set is **vendored in [`./skills/`](./skills/)** so you can read exactly what each one does. It bundles **8** `SKILL.md` files — the 7 stages above plus a `design-flow` orchestrator that runs the whole sequence:
+
+| Folder | Stage |
+|---|---|
+| [`skills/grill-me/`](./skills/grill-me/SKILL.md) | 1 — grill the requirements |
+| [`skills/design-brief/`](./skills/design-brief/SKILL.md) | 2 — design brief |
+| [`skills/information-architecture/`](./skills/information-architecture/SKILL.md) | 3 — information architecture |
+| [`skills/design-tokens/`](./skills/design-tokens/SKILL.md) | 4 — design tokens |
+| [`skills/brief-to-tasks/`](./skills/brief-to-tasks/SKILL.md) | 5 — brief → tasks |
+| [`skills/frontend-design/`](./skills/frontend-design/SKILL.md) | 6 — frontend build |
+| [`skills/design-review/`](./skills/design-review/SKILL.md) | 7 — design review |
+| [`skills/design-flow/`](./skills/design-flow/SKILL.md) | — orchestrates all of the above in order |
+
+To install them as live skills instead of just reading them:
 
 ```bash
 npx skills add julianoczkowski/designer-skills
 ```
 
-(Install third-party skills the same way you'd vet any dependency — read what they do first. See [`../Security Guardrails/`](../Security%20Guardrails/).)
+> Vendored from [`julianoczkowski/designer-skills`](https://github.com/julianoczkowski/designer-skills) under the **Apache-2.0** license (see [`skills/LICENSE`](./skills/LICENSE)). Install third-party skills the same way you'd vet any dependency — read what they do first. See [`../Security Guardrails/`](../Security%20Guardrails/).
 
 ---
 
