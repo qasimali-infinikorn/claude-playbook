@@ -20,11 +20,22 @@ A subagent is a separate Claude instance Claude Code can delegate to: its own co
 - `~/.claude/agents/*.md` — **global**, available in every repo on this machine. Use for personal habits and general engineering roles that aren't project-specific.
 - `.claude/agents/*.md` — **project**, checked into git, shared with the team, specific to that codebase.
 
-This playbook installed 5 global subagents (below) as personal, cross-project defaults.
+This playbook installed 6 global subagents (below) as personal, cross-project defaults.
 
 ---
 
-## The 5 subagents installed globally
+## The 6 subagents installed globally
+
+| Subagent | Tools | Model | Triggers on |
+|---|---|---|---|
+| [`ui-designer`](#ui-designer) | Read, Write, Edit, Glob, Grep, Bash, WebFetch | opus | Designing/building/redesigning UI |
+| [`code-reviewer`](#code-reviewer) | Read, Glob, Grep, Bash | opus | Reviewing a diff before merge |
+| [`debugger`](#debugger) | Read, Glob, Grep, Bash | opus | Root-causing a failure |
+| [`test-writer`](#test-writer) | Read, Write, Edit, Glob, Grep, Bash | sonnet | Adding test coverage |
+| [`performance-optimizer`](#performance-optimizer) | Read, Glob, Grep, Bash | opus | A measured slowness, not a hunch |
+| [`hermes-manager`](#hermes-manager) | Read, Bash, Grep, Glob | sonnet | Configuring/troubleshooting the Hermes Agent install |
+
+Notice the pattern: the four audit-only roles (`code-reviewer`, `debugger`, `performance-optimizer`, `hermes-manager`) deliberately have no `Write`/`Edit` — that's what stops a reviewer from "helpfully" fixing what it was only asked to diagnose. `ui-designer` and `test-writer` produce code, so they get write access.
 
 ### `ui-designer`
 **File:** `~/.claude/agents/ui-designer.md` · **Tools:** Read, Write, Edit, Glob, Grep, Bash, WebFetch · **Model:** opus
@@ -62,6 +73,13 @@ Writes tests that catch real regressions: happy path, boundaries, error handling
 Profiles before touching anything — no optimization without a baseline measurement. Finds the actual bottleneck (flame graph, query plan, bundle analyzer), fixes the highest-impact one first, and re-measures to report real before/after numbers.
 
 **Use it for:** "this page feels slow," "why is this query taking 4 seconds," "our bundle size grew, find out why." Not for speculative optimization with no measured problem.
+
+### `hermes-manager`
+**File:** `~/.claude/agents/hermes-manager.md` · **Tools:** Read, Bash, Grep, Glob · **Model:** sonnet
+
+Configures, scripts, and troubleshoots a local [Hermes Agent](https://hermes-agent.nousresearch.com/) install (`~/.hermes`) — Nous Research's standalone, self-hosted autonomous agent runtime. This is a **separate system from Claude Code**, not a skill or plugin; the subagent operates it entirely through the `hermes` CLI. Always runs `hermes doctor` first to see what's actually configured before touching anything. Explicitly refuses to run `hermes setup` or fabricate API keys/bot tokens — provider credentials and messaging-platform tokens (Discord, Telegram, …) always require the user directly.
+
+**Use it for:** "why is `hermes doctor` warning about X," "help me write a hermes cron job," "draft a config.yaml change to switch models," "explain what the gateway setup needs from me." Not for anything inside `.claude/` — that's a different system entirely.
 
 ---
 
@@ -107,7 +125,7 @@ You are a <role>. <Numbered, concrete steps for how it should approach the task 
 "do a good job" instructions. Tell it what to check, in what order, and what "done" means.>
 ```
 
-Rules of thumb learned from building the 5 above:
+Rules of thumb learned from building the 6 above:
 - **Scope `tools` down on purpose.** A reviewer or debugger shouldn't have `Write`/`Edit` — that's what keeps it from "helpfully" fixing something it was only asked to diagnose.
 - **Description is the router.** Claude picks a subagent by matching your request against every installed subagent's `description`. Two subagents with overlapping descriptions will conflict — keep them distinct.
 - **Reference skills by name in the body** if the subagent should lean on specific installed skills (see `ui-designer` above) — don't assume the right skill will auto-fire inside a subagent's fresh context, especially any skill with `disable-model-invocation: true`.
