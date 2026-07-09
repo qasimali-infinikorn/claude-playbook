@@ -1,10 +1,23 @@
 # Claude Playbook
 
+**📖 Read this as a website: [qasimali-infinikorn.github.io/claude-playbook](https://qasimali-infinikorn.github.io/claude-playbook/)** — every topic below, with search, sidebar navigation, and dark mode. Built with [VitePress](https://vitepress.dev) and deployed automatically on every push to `main` (see [`.github/workflows/deploy-docs.yml`](./.github/workflows/deploy-docs.yml)). Markdown here on GitHub works fine too — the site is just a nicer way to read it.
+
 A personal, growing knowledge base of findings, patterns, and templates for working effectively with **Claude** and **Claude Code**. The goal is simple: write down what I learn once, so I (and anyone else) can reuse it on the next project instead of rediscovering it.
 
 > Treat this repo as a living notebook. Every time something works well — a prompt pattern, a project-setup trick, a CLAUDE.md convention — capture it here.
 
 **👋 New to Claude Code?** Start with [`Getting Started/`](./Getting%20Started/), keep the [`Cheat Sheet/`](./Cheat%20Sheet/) handy, and skim the [`Glossary/`](./Glossary/) when a term trips you up.
+
+---
+
+## Running the docs site locally
+
+```bash
+npm install
+npm run docs:dev      # http://localhost:5173/claude-playbook/ — live reload
+npm run docs:build    # static build to .vitepress/dist/
+npm run docs:preview  # serve the production build locally
+```
 
 ---
 
