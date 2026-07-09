@@ -8,3 +8,8 @@
 # Logs / temp
 *.log
 .tmp/
+
+# Node / VitePress
+node_modules/
+.vitepress/cache/
+.vitepress/dist/
