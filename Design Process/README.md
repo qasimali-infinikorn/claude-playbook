@@ -102,6 +102,40 @@ npx skills add julianoczkowski/designer-skills
 
 ---
 
+## Taste & polish: the `ui-designer` subagent
+
+The 7 stages above get you a **correctly structured** UI — the right pages, the right IA, tokens that are internally consistent. They don't, on their own, stop stage 6 (frontend build) from landing on the generic "AI slop" look: default SaaS-blue gradients, cookie-cutter card grids, timid motion. That's a separate, narrower problem — **taste** — and it's worth a dedicated tool rather than folding it into the design-brief stage.
+
+Two more third-party skill sets are installed globally (`~/.claude/skills/`) for exactly this, alongside a global `ui-designer` subagent (`~/.claude/agents/ui-designer.md`) wired to use them:
+
+| Skill | Source | What it's for |
+|---|---|---|
+| `design-taste-frontend` | [Leonxlnx/taste-skill](https://github.com/Leonxlnx/taste-skill) | Default anti-slop direction: infers a design language from the brief instead of templating |
+| `high-end-visual-design` | Leonxlnx/taste-skill | "Premium/expensive-feeling" — exact fonts, spacing, shadows, card structure |
+| `gpt-taste` | Leonxlnx/taste-skill | Aggressive layout variance + GSAP scroll motion (pinning, stacking, scrubbing) |
+| `industrial-brutalist-ui` | Leonxlnx/taste-skill | Swiss print × military-terminal look, for data-heavy/technical UIs |
+| `minimalist-ui` | Leonxlnx/taste-skill | Clean editorial, warm monochrome, no gradients/heavy shadows |
+| `redesign-existing-projects` | Leonxlnx/taste-skill | Audit-first redesign of an existing UI without breaking functionality |
+| `emil-design-eng` | [emilkowalski/skills](https://github.com/emilkowalski/skills) | Interaction states, easing choices, component API polish — Emil Kowalski's design-engineering philosophy |
+| `review-animations` | emilkowalski/skills | Strict animation/motion critique. Set to `disable-model-invocation`, so it never fires on its own — you (or the subagent) have to invoke it explicitly |
+| `animation-vocabulary` | emilkowalski/skills | Reverse-lookup glossary: turns "the bouncy thing when a popover opens" into its actual term |
+
+**Where this fits in the 7-stage flow:** run stage 6 (frontend build) *through* the `ui-designer` subagent instead of directly — it picks one of the direction skills above based on the brief from stage 2, builds, then explicitly runs `review-animations` on anything it animates before calling stage 6 done. For stage 7 (design review), the same subagent's `redesign-existing-projects` skill is the audit-first path if the review turns up something that needs a real redesign, not just a fix.
+
+```
+"Use the ui-designer subagent to build the pricing page from design/brief.md and design/tokens.css"
+```
+
+Installed the same way as `designer-skills` above:
+
+```bash
+npx skills@latest add <owner/repo> --global --skill "<skill-name>"
+```
+
+Full detail on the subagent itself — tool scoping, how automatic-vs-explicit delegation works, parallel dispatch with the other 4 global subagents (`code-reviewer`, `debugger`, `test-writer`, `performance-optimizer`) — lives in [`../Subagents/`](../Subagents/).
+
+---
+
 ## How to actually run it
 
 1. **One stage per turn, in order.** Don't jump to "build" — let each doc land first.
@@ -121,6 +155,7 @@ npx skills add julianoczkowski/designer-skills
 ## See also
 
 - [`../Skills/`](../Skills/) — the design & quality skills referenced above
+- [`../Subagents/`](../Subagents/) — the `ui-designer` subagent in full, plus the other 4 global subagents
 - [`../Prompting Patterns/`](../Prompting%20Patterns/) — plan-before-code, writing good briefs
 - [`../Common Mistakes/`](../Common%20Mistakes/) — including "trusting *done* without verifying"
 - [`../Security Guardrails/`](../Security%20Guardrails/) — vetting third-party skills/MCP servers
