@@ -8,6 +8,8 @@ A personal, growing knowledge base of findings, patterns, and templates for work
 
 **👋 New to Claude Code?** Start with [`Getting Started/`](./Getting%20Started/), keep the [`Cheat Sheet/`](./Cheat%20Sheet/) handy, and skim the [`Glossary/`](./Glossary/) when a term trips you up.
 
+[![Claude Playbook docs site](./.vitepress/public/docs-site-preview.png)](https://qasimali-infinikorn.github.io/claude-playbook/)
+
 ---
 
 ## Running the docs site locally
