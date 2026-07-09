@@ -33,6 +33,7 @@ claude-playbook/
 │   # Working well
 ├── Prompting Patterns/             ← how to prompt for reliable results
 ├── Skills/                         ← the skills I use most, and when
+├── Subagents/                      ← delegating to subagents: global roster + how to invoke
 ├── Design Process/                 ← the 7-stage "real design process" for building UIs
 ├── Common Mistakes/                ← mistakes + the fix for each
 │
@@ -44,7 +45,8 @@ claude-playbook/
 │   # Setting up projects
 ├── CLAUDE.md Best Practices/       ← the 10 standard sections + a fill-in template
 ├── Claude Directory Layout/        ← the .claude/ tree: agents, commands, hooks, settings.json
-└── Project Setup Checklist/        ← make a new project agent-ready
+├── Project Setup Checklist/        ← make a new project agent-ready
+└── 10 Levels of Claude Code/       ← the full progression: terminal → routines
 ```
 
 As the playbook grows, new topics get their own top-level folder, each with its own `README.md`.
@@ -88,6 +90,7 @@ Keep entries:
 | **Working well** | |
 | [Prompting Patterns](./Prompting%20Patterns/) | Patterns for prompting Claude & Claude Code, plus API/SDK findings |
 | [Skills](./Skills/) | The skills I use most (ui-ux-pro-max, grill-me, frontend-design, docs…) and when to use each |
+| [Subagents](./Subagents/) | Delegating to subagents: the 5 global roles installed (ui-designer, code-reviewer, debugger, test-writer, performance-optimizer) and how to invoke them, solo or in parallel |
 | [Design Process](./Design%20Process/) | The 7-stage "real design process" (grill → brief → IA → tokens → tasks → build → review) for building UIs intentionally |
 | [Common Mistakes](./Common%20Mistakes/) | Mistakes I've made working with Claude + the fix for each |
 | **Doing it safely** | |
@@ -98,5 +101,6 @@ Keep entries:
 | [CLAUDE.md Best Practices](./CLAUDE.md%20Best%20Practices/) | The 10 standard sections + a ready-to-use template |
 | [Claude Directory Layout](./Claude%20Directory%20Layout/) | The `.claude/` tree explained: agents, commands, hooks, skills, settings.json — with verified field names |
 | [Project Setup Checklist](./Project%20Setup%20Checklist/) | Steps to make a new project agent-ready from the first prompt |
+| [10 Levels of Claude Code](./10%20Levels%20of%20Claude%20Code/) | The full progression from terminal use to scheduled routines, with use cases and "what to add next" at each level |
 
 _More topics added over time._
