@@ -20,22 +20,25 @@ A subagent is a separate Claude instance Claude Code can delegate to: its own co
 - `~/.claude/agents/*.md` — **global**, available in every repo on this machine. Use for personal habits and general engineering roles that aren't project-specific.
 - `.claude/agents/*.md` — **project**, checked into git, shared with the team, specific to that codebase.
 
-This playbook installed 6 global subagents (below) as personal, cross-project defaults.
+This playbook installed 7 global subagents (below) as personal, cross-project defaults.
 
 ---
 
-## The 6 subagents installed globally
+## The 7 subagents installed globally
 
 | Subagent | Tools | Model | Triggers on |
 |---|---|---|---|
 | [`ui-designer`](#ui-designer) | Read, Write, Edit, Glob, Grep, Bash, WebFetch | opus | Designing/building/redesigning UI |
 | [`code-reviewer`](#code-reviewer) | Read, Glob, Grep, Bash | opus | Reviewing a diff before merge |
 | [`debugger`](#debugger) | Read, Glob, Grep, Bash | opus | Root-causing a failure |
-| [`test-writer`](#test-writer) | Read, Write, Edit, Glob, Grep, Bash | sonnet | Adding test coverage |
+| [`test-writer`](#test-writer) | Read, Write, Edit, Glob, Grep, Bash | sonnet | Adding test coverage (single function/unit level) |
+| [`sdet-automation`](#sdet-automation) | Read, Write, Edit, Glob, Grep, Bash | sonnet | API/UI test automation + test strategy (SDET level) |
 | [`performance-optimizer`](#performance-optimizer) | Read, Glob, Grep, Bash | opus | A measured slowness, not a hunch |
 | [`hermes-manager`](#hermes-manager) | Read, Bash, Grep, Glob | sonnet | Configuring/troubleshooting the Hermes Agent install |
 
-Notice the pattern: the four audit-only roles (`code-reviewer`, `debugger`, `performance-optimizer`, `hermes-manager`) deliberately have no `Write`/`Edit` — that's what stops a reviewer from "helpfully" fixing what it was only asked to diagnose. `ui-designer` and `test-writer` produce code, so they get write access.
+Notice the pattern: the four audit-only roles (`code-reviewer`, `debugger`, `performance-optimizer`, `hermes-manager`) deliberately have no `Write`/`Edit` — that's what stops a reviewer from "helpfully" fixing what it was only asked to diagnose. `ui-designer`, `test-writer`, and `sdet-automation` produce code, so they get write access.
+
+`test-writer` vs `sdet-automation`: `test-writer` is generic — unit/integration tests for whatever code exists, in whatever framework the project already uses. `sdet-automation` is framework-aware at the SDET level — it picks RestAssured vs. Playwright vs. Selenium based on what's under test, runs exploratory test design before scripting, and prioritizes coverage by risk. Reach for `test-writer` on "add tests for this function"; reach for `sdet-automation` on "build an API test suite" or "what should we test first."
 
 ### `ui-designer`
 **File:** `~/.claude/agents/ui-designer.md` · **Tools:** Read, Write, Edit, Glob, Grep, Bash, WebFetch · **Model:** opus
@@ -66,6 +69,15 @@ Root-causes a failing test, crash, or bug report. Reproduces first, reads the ac
 Writes tests that catch real regressions: happy path, boundaries, error handling, and edge cases implied by the code's own conditionals. Matches the project's existing test framework and conventions rather than assuming one. Runs the suite after writing to confirm green.
 
 **Use it for:** "add tests for this function," "write a regression test for the bug we just fixed," "this file has no coverage."
+
+### `sdet-automation`
+**File:** `~/.claude/agents/sdet-automation.md` · **Tools:** Read, Write, Edit, Glob, Grep, Bash · **Model:** sonnet
+
+Builds test automation and test strategy at a senior-SDET level. Routes to the right already-installed skill based on what's under test — `api-restassured` for REST APIs, `playwright-ui-automation` or `selenium-webdriver-automation` for browser/E2E — and to `exploratory-test-designer` / `test-intelligence-feed` when the ask is strategy-shaped ("what should we test first," coverage-gap analysis, a risk-based test plan) rather than test-shaped. Runs exploratory design before scripting, matches the project's existing conventions instead of introducing a second stack, and always runs what it writes before calling it done.
+
+**Backed by these globally installed skills** (`~/.claude/skills/`): `api-restassured`, `playwright-ui-automation`, `selenium-webdriver-automation`, `exploratory-test-designer`, `test-intelligence-feed` — the same 5-skill breakdown as [JapneetSachdeva1/sdet-automation-skills](https://github.com/JapneetSachdeva1/sdet-automation-skills), already present from an existing plugin marketplace rather than installed fresh.
+
+**Use it for:** "build an API test suite for this service," "write E2E tests for the checkout flow," "what should we test first, we have no test plan," "find our coverage gaps." Not for a quick test on one function — that's `test-writer`.
 
 ### `performance-optimizer`
 **File:** `~/.claude/agents/performance-optimizer.md` · **Tools:** Read, Glob, Grep, Bash · **Model:** opus
