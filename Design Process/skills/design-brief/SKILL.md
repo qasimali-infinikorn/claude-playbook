@@ -31,7 +31,7 @@ This skill creates a design brief through structured conversation. You may skip 
 3. Interview the user relentlessly about every aspect of the design until you reach a shared understanding. Walk down each branch of the design tree, resolving dependencies between decisions one by one. For each question, provide your recommended answer.
 
    Cover at minimum:
-   - Who is the primary user their JTBD and what are they trying to accomplish?
+   - Who is the primary user, what is their JTBD, and what are they trying to accomplish?
    - What does success look like for this interface?
    - What is the emotional tone? (calm, urgent, playful, authoritative, warm, clinical)
    - What existing products, sites, or styles should this feel like? What should it NOT feel like?

@@ -8,7 +8,7 @@ New to Claude Code? Start here. This gets you from zero to your first useful cha
 
 ## 1. Install
 
-Claude Code runs in the terminal. Install it (see the official docs for the current command), then verify:
+Claude Code runs in the terminal. Install it using the current command from the [official Claude Code setup docs](https://code.claude.com/docs/en/setup), then verify:
 
 ```bash
 claude --version
