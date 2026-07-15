@@ -106,7 +106,7 @@ npx skills add julianoczkowski/designer-skills
 
 The 7 stages above get you a **correctly structured** UI — the right pages, the right IA, tokens that are internally consistent. They don't, on their own, stop stage 6 (frontend build) from landing on the generic "AI slop" look: default SaaS-blue gradients, cookie-cutter card grids, timid motion. That's a separate, narrower problem — **taste** — and it's worth a dedicated tool rather than folding it into the design-brief stage.
 
-Two more third-party skill sets are installed globally (`~/.claude/skills/`) for exactly this, alongside a global `ui-designer` subagent (`~/.claude/agents/ui-designer.md`) wired to use them:
+Two more third-party skill sets can be installed globally (`~/.claude/skills/`) for exactly this, alongside a global `ui-designer` subagent (`~/.claude/agents/ui-designer.md`) wired to use them. The vendored `./skills/` files above are enough to read and follow the 7-stage process; the global skills/subagent setup is optional and only needed if you want this taste pass available in every repo:
 
 | Skill | Source | What it's for |
 |---|---|---|
@@ -123,7 +123,7 @@ Two more third-party skill sets are installed globally (`~/.claude/skills/`) for
 **Where this fits in the 7-stage flow:** run stage 6 (frontend build) *through* the `ui-designer` subagent instead of directly — it picks one of the direction skills above based on the brief from stage 2, builds, then explicitly runs `review-animations` on anything it animates before calling stage 6 done. For stage 7 (design review), the same subagent's `redesign-existing-projects` skill is the audit-first path if the review turns up something that needs a real redesign, not just a fix.
 
 ```
-"Use the ui-designer subagent to build the pricing page from design/brief.md and design/tokens.css"
+"Use the ui-designer subagent to build the pricing page from .design/pricing-page/DESIGN_BRIEF.md and .design/pricing-page/DESIGN_TOKENS.css"
 ```
 
 Installed the same way as `designer-skills` above:
@@ -132,14 +132,14 @@ Installed the same way as `designer-skills` above:
 npx skills@latest add <owner/repo> --global --skill "<skill-name>"
 ```
 
-Full detail on the subagent itself — tool scoping, how automatic-vs-explicit delegation works, parallel dispatch with the other 4 global subagents (`code-reviewer`, `debugger`, `test-writer`, `performance-optimizer`) — lives in [`../Subagents/`](../Subagents/).
+Full detail on the subagent itself — tool scoping, how automatic-vs-explicit delegation works, and parallel dispatch with other global subagents — lives in [`../Subagents/`](../Subagents/).
 
 ---
 
 ## How to actually run it
 
 1. **One stage per turn, in order.** Don't jump to "build" — let each doc land first.
-2. **Keep the artifacts in the repo** (e.g. `design/brief.md`, `design/ia.md`, `design/tokens.css`, `design/tasks.md`). They're context for every later stage *and* for the next session.
+2. **Keep the artifacts in the repo** (e.g. `.design/<feature-slug>/DESIGN_BRIEF.md`, `.design/<feature-slug>/INFORMATION_ARCHITECTURE.md`, `.design/<feature-slug>/DESIGN_TOKENS.css`, `.design/<feature-slug>/TASKS.md`). They're context for every later stage *and* for the next session.
 3. **Skip stages that don't apply.** Existing design system? Skip tokens. Tiny single component? You may only need stages 1, 6, 7.
 4. **Don't skip the grill.** It's the cheapest stage and prevents the most expensive mistakes.
 5. **Review with your eyes, not just "done."** Run the app; use screenshots. → [`../Common Mistakes/`](../Common%20Mistakes/)
@@ -155,7 +155,7 @@ Full detail on the subagent itself — tool scoping, how automatic-vs-explicit d
 ## See also
 
 - [`../Skills/`](../Skills/) — the design & quality skills referenced above
-- [`../Subagents/`](../Subagents/) — the `ui-designer` subagent in full, plus the other 4 global subagents
+- [`../Subagents/`](../Subagents/) — the `ui-designer` subagent in full, plus the broader global subagent roster
 - [`../Prompting Patterns/`](../Prompting%20Patterns/) — plan-before-code, writing good briefs
 - [`../Common Mistakes/`](../Common%20Mistakes/) — including "trusting *done* without verifying"
 - [`../Security Guardrails/`](../Security%20Guardrails/) — vetting third-party skills/MCP servers

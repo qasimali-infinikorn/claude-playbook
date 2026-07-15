@@ -20,7 +20,7 @@ A subagent is a separate Claude instance Claude Code can delegate to: its own co
 - `~/.claude/agents/*.md` — **global**, available in every repo on this machine. Use for personal habits and general engineering roles that aren't project-specific.
 - `.claude/agents/*.md` — **project**, checked into git, shared with the team, specific to that codebase.
 
-This playbook installed 7 global subagents (below) as personal, cross-project defaults.
+This playbook documents 7 global subagents as personal, cross-project defaults. Treat them as a reference roster: copy the roles that fit your own workflow, or create project-level versions under `.claude/agents/` when they should be shared with a team.
 
 ---
 
@@ -137,7 +137,7 @@ You are a <role>. <Numbered, concrete steps for how it should approach the task 
 "do a good job" instructions. Tell it what to check, in what order, and what "done" means.>
 ```
 
-Rules of thumb learned from building the 6 above:
+Rules of thumb learned from building the 7 above:
 - **Scope `tools` down on purpose.** A reviewer or debugger shouldn't have `Write`/`Edit` — that's what keeps it from "helpfully" fixing something it was only asked to diagnose.
 - **Description is the router.** Claude picks a subagent by matching your request against every installed subagent's `description`. Two subagents with overlapping descriptions will conflict — keep them distinct.
 - **Reference skills by name in the body** if the subagent should lean on specific installed skills (see `ui-designer` above) — don't assume the right skill will auto-fire inside a subagent's fresh context, especially any skill with `disable-model-invocation: true`.

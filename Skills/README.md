@@ -3,6 +3,8 @@
 A curated list of the Claude / Claude Code **skills** I reach for most — what each one does, when to use it, and how to invoke it. Skills are specialized capabilities you trigger with a slash command (e.g. `/grill-me`) or that Claude auto-invokes when your request matches.
 
 > Tip: when in doubt, just describe the task — Claude often picks the right skill automatically. Type the slash command when you want to force it.
+>
+> Availability depends on what is installed in your Claude Code environment. Treat this as a personal shortlist: if a skill is missing, install it, use the closest built-in equivalent, or keep the pattern as prompt guidance.
 
 ---
 

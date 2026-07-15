@@ -18,13 +18,13 @@
 - Default branch: `main`. Branch for changes; commit/push only when asked.
 - <Any repo-specific commit rules.>
 
-# Project Overview
+## Project Overview
 
 <!-- 2–3 lines on purpose + audience. Link to README / product doc. Don't restate the whole feature list. -->
 
 See `README.md` for the full feature list and setup.
 
-# Tech Stack
+## Tech Stack
 
 <!-- Only what affects how code is written. Call out versions that differ from common defaults / training data. -->
 
@@ -35,7 +35,7 @@ See `README.md` for the full feature list and setup.
 - Tests:
 - Full version table: `README.md`.
 
-# Architecture
+## Architecture
 
 <!-- The boundaries that matter: how pieces talk, where secrets live, the single chokepoint for X. A small annotated tree beats prose. -->
 
@@ -43,7 +43,7 @@ See `README.md` for the full feature list and setup.
 - Key boundary (e.g. all API calls go through `lib/api.ts`; secrets never reach the client):
 - Data flow / auth flow:
 
-# Coding Conventions
+## Coding Conventions
 
 <!-- Specific, enforceable rules. Mention the linter/formatter. -->
 
@@ -52,7 +52,7 @@ See `README.md` for the full feature list and setup.
 - Imports: <alias convention>.
 - Run `<lint cmd>` and `<typecheck cmd>` before committing. Match surrounding style.
 
-# UI & Design System Rules
+## UI & Design System Rules
 
 <!-- If there's no UI, write: "N/A — API-only project. Design system lives in <where>." -->
 
@@ -61,7 +61,7 @@ See `README.md` for the full feature list and setup.
 - Styling approach: <e.g. utilities for simple UI, tokens/inline for complex>.
 - Components: <where shared components live; icon library; logo component>.
 
-# Content & Copy Guidance
+## Content & Copy Guidance
 
 <!-- Voice, audience, domain vocabulary. For APIs: field naming + error-shape stability. -->
 
@@ -70,7 +70,7 @@ See `README.md` for the full feature list and setup.
 - Microcopy style: <concise, action-first, casing>.
 - (API) Field naming + error shape: <rules; update API spec on contract change>.
 
-# Testing & Quality Bar
+## Testing & Quality Bar
 
 <!-- Define "done" as a checklist of commands that MUST pass. This is what stops broken work shipping. -->
 
@@ -85,7 +85,7 @@ A change is "done" only when all of these pass:
 
 Add/extend tests when adding logic. New user-facing flows get an e2e test.
 
-# File & Component Placement
+## File & Component Placement
 
 <!-- Where new code/tests/routes/migrations go, so the agent doesn't invent a structure. -->
 
@@ -95,7 +95,7 @@ Add/extend tests when adding logic. New user-facing flows get an e2e test.
 - Tests → <mirror the source tree>
 - DB changes → <migrations; never edit schema by hand>
 
-# Safe Change Rule
+## Safe Change Rule
 
 <!-- Hard guardrails. What never to touch, what to coordinate, the smallest-diff principle. -->
 
@@ -105,7 +105,7 @@ Add/extend tests when adding logic. New user-facing flows get an e2e test.
 - (Multi-repo) <X> is a cross-repo contract change — coordinate and update the API spec.
 - Prefer the smallest diff; reuse existing helpers/components/tokens before adding new ones.
 
-# Specific Commands
+## Specific Commands
 
 <!-- The real, copy-paste-accurate commands. -->
 

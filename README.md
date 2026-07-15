@@ -105,7 +105,7 @@ Keep entries:
 | **Working well** | |
 | [Prompting Patterns](./Prompting%20Patterns/) | Patterns for prompting Claude & Claude Code, plus API/SDK findings |
 | [Skills](./Skills/) | The skills I use most (ui-ux-pro-max, grill-me, frontend-design, docs…) and when to use each |
-| [Subagents](./Subagents/) | Delegating to subagents: the 5 global roles installed (ui-designer, code-reviewer, debugger, test-writer, performance-optimizer) and how to invoke them, solo or in parallel |
+| [Subagents](./Subagents/) | Delegating to subagents: the global subagent roster, when to use each role, and how to invoke them solo or in parallel |
 | [Design Process](./Design%20Process/) | The 7-stage "real design process" (grill → brief → IA → tokens → tasks → build → review) for building UIs intentionally |
 | [Common Mistakes](./Common%20Mistakes/) | Mistakes I've made working with Claude + the fix for each |
 | **Doing it safely** | |
