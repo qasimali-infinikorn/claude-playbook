@@ -76,6 +76,106 @@ Follow up:
 
 ---
 
+## Walkthrough 5 — Setting up an MCP server safely
+
+**Situation:** you want Claude to read GitHub issues directly.
+
+**Step 1 — define the job**
+> "I want Claude to read GitHub issues and PRs for this repo. It should not merge, push, or post comments yet. What MCP access is needed?"
+
+**Step 2 — install locally first**
+Add the server in your local Claude Code config, not shared project config. Authenticate with the narrowest scopes available.
+
+**Step 3 — inspect tools**
+> "List the tools exposed by the GitHub MCP server and explain which ones are read-only vs write-capable. Do not call any write tools."
+
+**Step 4 — test read-only**
+> "Read issue #42 and summarize the requested behavior. Do not edit files or post comments."
+
+**Step 5 — document guardrails**
+Add the allowed use and denied actions to `CLAUDE.md`.
+
+See [`../MCP Playbook/`](../MCP%20Playbook/).
+
+---
+
+## Walkthrough 6 — Comparing two approaches with worktrees
+
+**Situation:** a bug can be fixed either with a small patch or a deeper refactor.
+
+**Step 1 — create isolated attempts**
+> "Create two worktrees: one for a minimal fix and one for a refactor approach. Each should run the same focused test."
+
+**Step 2 — run each attempt separately**
+In each worktree:
+> "Reproduce the failure, implement this approach, run the verifier, and write a short summary."
+
+**Step 3 — compare**
+> "Compare both branches by verifier result, diff size, risk, tests, and maintainability. Recommend one. Do not merge."
+
+*Why:* parallelism is useful only when outputs are isolated and judged by the same criteria.
+
+See [`../Worktrees and Parallel Agents/`](../Worktrees%20and%20Parallel%20Agents/).
+
+---
+
+## Walkthrough 7 — Building a small harness
+
+**Situation:** docs drift keeps recurring.
+
+**Step 1 — define the harness**
+> "Design a docs drift harness: fixtures, allowed actions, denied actions, success criteria, graders, metrics, and report format. Do not edit yet."
+
+**Step 2 — run it manually**
+> "Run the docs harness once. Make docs-only changes, run `npm run docs:build`, and report changed files."
+
+**Step 3 — preserve it**
+Move the harness definition to `.claude/evals/docs-drift/eval.md` or `docs/harness/docs-drift.md`.
+
+**Step 4 — automate later**
+Only after the manual run is reliable, consider a CI or scheduled job.
+
+See [`../Harness/`](../Harness/).
+
+---
+
+## Walkthrough 8 — Headless CI summary
+
+**Situation:** you want a PR summary generated automatically.
+
+**Step 1 — start read-only**
+> "Write a headless prompt that summarizes the PR diff, risks, and test plan. It must not edit files or post comments."
+
+**Step 2 — save artifact**
+Run `claude -p` in CI and save JSON output as an artifact.
+
+**Step 3 — review format**
+Check several PRs before posting comments automatically.
+
+**Step 4 — add posting only if useful**
+Give PR comment permission only after the summary format is stable.
+
+See [`../Headless and CI/`](../Headless%20and%20CI/).
+
+---
+
+## Walkthrough 9 — Preparing a release
+
+**Situation:** you are ready to deploy a release.
+
+**Step 1 — ask for prep, not deploy**
+> "Prepare this release. Draft release notes, identify migrations/config changes, run the release quality bar, and produce a rollback checklist. Do not deploy."
+
+**Step 2 — verify**
+Run tests, build, migration checks, and staging smoke tests.
+
+**Step 3 — human approval**
+Only after a human approves target environment, commit, migration status, and rollback plan should deployment happen.
+
+See [`../Release and Deployment/`](../Release%20and%20Deployment/).
+
+---
+
 ## The pattern across all of these
 
 1. **Context first** — name files, paste errors, point at conventions.

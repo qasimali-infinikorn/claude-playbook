@@ -34,6 +34,8 @@ for (const dir of [
   'Cost and Observability',
   'Model Selection',
   'Prompt Library',
+  'Templates',
+  'Docs Maintenance',
   'Design Process',
   'Common Mistakes',
   'Git and PR Workflow',
@@ -123,6 +125,8 @@ export default defineConfig({
           { text: 'Cost & Observability', link: '/Cost%20and%20Observability/' },
           { text: 'Model Selection', link: '/Model%20Selection/' },
           { text: 'Prompt Library', link: '/Prompt%20Library/' },
+          { text: 'Templates', link: '/Templates/' },
+          { text: 'Docs Maintenance', link: '/Docs%20Maintenance/' },
           { text: 'Design Process', link: '/Design%20Process/' },
           { text: 'Common Mistakes', link: '/Common%20Mistakes/' }
         ]

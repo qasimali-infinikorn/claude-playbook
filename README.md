@@ -63,6 +63,8 @@ claude-playbook/
 ├── Cost and Observability/         ← tokens, latency, traces, retries, and stop rules
 ├── Model Selection/                ← choosing model/reasoning depth by task risk
 ├── Prompt Library/                 ← ready-to-copy prompts for common workflows
+├── Templates/                      ← reusable handoff, release, postmortem, harness, PR templates
+├── Docs Maintenance/               ← docs quality bar, nav checks, and contribution checklist
 ├── Design Process/                 ← the 7-stage "real design process" for building UIs
 ├── Common Mistakes/                ← mistakes + the fix for each
 │
@@ -139,6 +141,8 @@ Keep entries:
 | [Cost & Observability](./Cost%20and%20Observability/) | Track cost, latency, retries, traces, pass rates, and stop conditions |
 | [Model Selection](./Model%20Selection/) | Pick model strength and reasoning depth by task risk and cost |
 | [Prompt Library](./Prompt%20Library/) | Ready-to-copy prompts for common Claude Code workflows |
+| [Templates](./Templates/) | Reusable handoff, release, postmortem, harness, PR, policy, and settings templates |
+| [Docs Maintenance](./Docs%20Maintenance/) | Quality bar, topic checklist, navigation audit, and docs review checklist |
 | [Design Process](./Design%20Process/) | The 7-stage "real design process" (grill → brief → IA → tokens → tasks → build → review) for building UIs intentionally |
 | [Common Mistakes](./Common%20Mistakes/) | Mistakes I've made working with Claude + the fix for each |
 | **Doing it safely** | |
