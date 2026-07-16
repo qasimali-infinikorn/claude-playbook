@@ -49,6 +49,7 @@ claude-playbook/
 ├── Prompting Patterns/             ← how to prompt for reliable results
 ├── Skills/                         ← the skills I use most, and when
 ├── Subagents/                      ← delegating to subagents: global roster + how to invoke
+├── Loop Engineering/               ← designing safe, repeatable agent feedback loops
 ├── Design Process/                 ← the 7-stage "real design process" for building UIs
 ├── Common Mistakes/                ← mistakes + the fix for each
 │
@@ -105,7 +106,8 @@ Keep entries:
 | **Working well** | |
 | [Prompting Patterns](./Prompting%20Patterns/) | Patterns for prompting Claude & Claude Code, plus API/SDK findings |
 | [Skills](./Skills/) | The skills I use most (ui-ux-pro-max, grill-me, frontend-design, docs…) and when to use each |
-| [Subagents](./Subagents/) | Delegating to subagents: the 5 global roles installed (ui-designer, code-reviewer, debugger, test-writer, performance-optimizer) and how to invoke them, solo or in parallel |
+| [Subagents](./Subagents/) | Delegating to subagents: the global subagent roster, when to use each role, and how to invoke them solo or in parallel |
+| [Loop Engineering](./Loop%20Engineering/) | How to design safe agent loops: goals, verifiers, retry caps, subagents, hooks, examples, and anti-patterns |
 | [Design Process](./Design%20Process/) | The 7-stage "real design process" (grill → brief → IA → tokens → tasks → build → review) for building UIs intentionally |
 | [Common Mistakes](./Common%20Mistakes/) | Mistakes I've made working with Claude + the fix for each |
 | **Doing it safely** | |

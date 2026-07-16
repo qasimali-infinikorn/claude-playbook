@@ -48,6 +48,8 @@ Plain-English definitions of the terms you'll hear when working with Claude and 
 
 **Subagent** — a separate agent Claude can spawn to handle a focused task in its own context, then report back.
 
+**Loop engineering** — designing a repeatable agent workflow with a clear goal, verifier, boundaries, retry cap, and human gate. It turns "keep prompting the agent" into a controlled feedback loop. → `../Loop Engineering/`
+
 ---
 
 ## Quality & workflow

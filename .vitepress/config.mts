@@ -20,6 +20,7 @@ for (const dir of [
   'Prompting Patterns',
   'Skills',
   'Subagents',
+  'Loop Engineering',
   'Design Process',
   'Common Mistakes',
   'Git and PR Workflow',
@@ -90,6 +91,7 @@ export default defineConfig({
           { text: 'Prompting Patterns', link: '/Prompting%20Patterns/' },
           { text: 'Skills', link: '/Skills/' },
           { text: 'Subagents', link: '/Subagents/' },
+          { text: 'Loop Engineering', link: '/Loop%20Engineering/' },
           { text: 'Design Process', link: '/Design%20Process/' },
           { text: 'Common Mistakes', link: '/Common%20Mistakes/' }
         ]
