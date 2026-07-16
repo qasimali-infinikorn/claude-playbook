@@ -50,6 +50,7 @@ claude-playbook/
 ├── Skills/                         ← the skills I use most, and when
 ├── Subagents/                      ← delegating to subagents: global roster + how to invoke
 ├── Loop Engineering/               ← designing safe, repeatable agent feedback loops
+├── Harness/                        ← building agent/eval harnesses for repeatable evidence
 ├── Design Process/                 ← the 7-stage "real design process" for building UIs
 ├── Common Mistakes/                ← mistakes + the fix for each
 │
@@ -108,6 +109,7 @@ Keep entries:
 | [Skills](./Skills/) | The skills I use most (ui-ux-pro-max, grill-me, frontend-design, docs…) and when to use each |
 | [Subagents](./Subagents/) | Delegating to subagents: the global subagent roster, when to use each role, and how to invoke them solo or in parallel |
 | [Loop Engineering](./Loop%20Engineering/) | How to design safe agent loops: goals, verifiers, retry caps, subagents, hooks, examples, and anti-patterns |
+| [Harness](./Harness/) | How to build agent/eval harnesses: fixtures, tools, graders, traces, metrics, CI patterns, and examples |
 | [Design Process](./Design%20Process/) | The 7-stage "real design process" (grill → brief → IA → tokens → tasks → build → review) for building UIs intentionally |
 | [Common Mistakes](./Common%20Mistakes/) | Mistakes I've made working with Claude + the fix for each |
 | **Doing it safely** | |

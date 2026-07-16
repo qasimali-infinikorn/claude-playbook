@@ -201,5 +201,6 @@ Don't jump straight to Lvl 10. Each level below it is what makes the level above
 - [`../Subagents/`](../Subagents/) — Lvl 7 in depth, plus the global subagent roster documented alongside this doc.
 - [`../Skills/`](../Skills/) — the skills kept in active rotation.
 - [`../Loop Engineering/`](../Loop%20Engineering/) — designing the feedback loops that connect skills, subagents, hooks, worktrees, and routines.
+- [`../Harness/`](../Harness/) — building eval and runtime harnesses that measure whether those loops actually work.
 - [`../Security Guardrails/`](../Security%20Guardrails/) — why permission scoping matters before you reach Lvl 8–10.
 - [`../Glossary/`](../Glossary/) — plain-English definitions of every term used here.

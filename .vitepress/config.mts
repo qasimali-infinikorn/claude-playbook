@@ -21,6 +21,7 @@ for (const dir of [
   'Skills',
   'Subagents',
   'Loop Engineering',
+  'Harness',
   'Design Process',
   'Common Mistakes',
   'Git and PR Workflow',
@@ -92,6 +93,7 @@ export default defineConfig({
           { text: 'Skills', link: '/Skills/' },
           { text: 'Subagents', link: '/Subagents/' },
           { text: 'Loop Engineering', link: '/Loop%20Engineering/' },
+          { text: 'Harness', link: '/Harness/' },
           { text: 'Design Process', link: '/Design%20Process/' },
           { text: 'Common Mistakes', link: '/Common%20Mistakes/' }
         ]

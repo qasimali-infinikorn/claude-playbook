@@ -50,6 +50,8 @@ Plain-English definitions of the terms you'll hear when working with Claude and 
 
 **Loop engineering** — designing a repeatable agent workflow with a clear goal, verifier, boundaries, retry cap, and human gate. It turns "keep prompting the agent" into a controlled feedback loop. → `../Loop Engineering/`
 
+**Harness** — a controlled test rig for an agent workflow: task, fixture, allowed tools, denied actions, verifier, trace, report, and baseline. → `../Harness/`
+
 ---
 
 ## Quality & workflow

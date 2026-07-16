@@ -517,6 +517,7 @@ If any answer is "no", keep the loop manual.
 
 ## See also
 
+- [`../Harness/`](../Harness/) - building the fixtures, graders, traces, and reports that prove a loop works.
 - [`../Prompting Patterns/`](../Prompting%20Patterns/) - writing goals, constraints, and definitions of done.
 - [`../Skills/`](../Skills/) - packaging repeatable loops as reusable skills.
 - [`../Subagents/`](../Subagents/) - splitting planner, builder, reviewer, debugger, and tester roles.
