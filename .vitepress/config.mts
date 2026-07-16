@@ -22,14 +22,31 @@ for (const dir of [
   'Subagents',
   'Loop Engineering',
   'Harness',
+  'MCP Playbook',
+  'Plugins Playbook',
+  'Memory and Context',
+  'Worktrees and Parallel Agents',
+  'Headless and CI',
+  'Hooks Cookbook',
+  'Agent Team Patterns',
+  'Spec to Implementation',
+  'Verification Recipes',
+  'Cost and Observability',
+  'Model Selection',
+  'Prompt Library',
   'Design Process',
   'Common Mistakes',
   'Git and PR Workflow',
   'Security Guardrails',
+  'Release and Deployment',
+  'Database Change Workflow',
+  'AI Coding Standards',
+  'Failure Postmortems',
   'Troubleshooting and FAQ',
   'CLAUDE.md Best Practices',
   'Claude Directory Layout',
   'Project Setup Checklist',
+  'Team Adoption',
   '10 Levels of Claude Code'
 ]) {
   rewrites[`${dir}/README.md`] = `${dir}/index.md`
@@ -94,6 +111,18 @@ export default defineConfig({
           { text: 'Subagents', link: '/Subagents/' },
           { text: 'Loop Engineering', link: '/Loop%20Engineering/' },
           { text: 'Harness', link: '/Harness/' },
+          { text: 'MCP Playbook', link: '/MCP%20Playbook/' },
+          { text: 'Plugins Playbook', link: '/Plugins%20Playbook/' },
+          { text: 'Memory & Context', link: '/Memory%20and%20Context/' },
+          { text: 'Worktrees & Parallel Agents', link: '/Worktrees%20and%20Parallel%20Agents/' },
+          { text: 'Headless & CI', link: '/Headless%20and%20CI/' },
+          { text: 'Hooks Cookbook', link: '/Hooks%20Cookbook/' },
+          { text: 'Agent Team Patterns', link: '/Agent%20Team%20Patterns/' },
+          { text: 'Spec to Implementation', link: '/Spec%20to%20Implementation/' },
+          { text: 'Verification Recipes', link: '/Verification%20Recipes/' },
+          { text: 'Cost & Observability', link: '/Cost%20and%20Observability/' },
+          { text: 'Model Selection', link: '/Model%20Selection/' },
+          { text: 'Prompt Library', link: '/Prompt%20Library/' },
           { text: 'Design Process', link: '/Design%20Process/' },
           { text: 'Common Mistakes', link: '/Common%20Mistakes/' }
         ]
@@ -103,6 +132,10 @@ export default defineConfig({
         items: [
           { text: 'Git & PR Workflow', link: '/Git%20and%20PR%20Workflow/' },
           { text: 'Security Guardrails', link: '/Security%20Guardrails/' },
+          { text: 'Release & Deployment', link: '/Release%20and%20Deployment/' },
+          { text: 'Database Change Workflow', link: '/Database%20Change%20Workflow/' },
+          { text: 'AI Coding Standards', link: '/AI%20Coding%20Standards/' },
+          { text: 'Failure Postmortems', link: '/Failure%20Postmortems/' },
           { text: 'Troubleshooting & FAQ', link: '/Troubleshooting%20and%20FAQ/' }
         ]
       },
@@ -112,6 +145,7 @@ export default defineConfig({
           { text: 'CLAUDE.md Best Practices', link: '/CLAUDE.md%20Best%20Practices/' },
           { text: 'Claude Directory Layout', link: '/Claude%20Directory%20Layout/' },
           { text: 'Project Setup Checklist', link: '/Project%20Setup%20Checklist/' },
+          { text: 'Team Adoption', link: '/Team%20Adoption/' },
           { text: '10 Levels of Claude Code', link: '/10%20Levels%20of%20Claude%20Code/' }
         ]
       }

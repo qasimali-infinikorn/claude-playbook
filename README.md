@@ -51,18 +51,35 @@ claude-playbook/
 ├── Subagents/                      ← delegating to subagents: global roster + how to invoke
 ├── Loop Engineering/               ← designing safe, repeatable agent feedback loops
 ├── Harness/                        ← building agent/eval harnesses for repeatable evidence
+├── MCP Playbook/                   ← connecting Claude Code to external tools safely
+├── Plugins Playbook/               ← installing, reviewing, and sharing plugins
+├── Memory and Context/             ← managing CLAUDE.md, memory, handoffs, and context hygiene
+├── Worktrees and Parallel Agents/  ← isolated branches for parallel attempts
+├── Headless and CI/                ← non-interactive Claude Code, CI, and scheduled automation
+├── Hooks Cookbook/                 ← practical hook recipes and safety gates
+├── Agent Team Patterns/            ← planner/builder/reviewer/tester/judge topologies
+├── Spec to Implementation/         ← turning issues and specs into verified PRs
+├── Verification Recipes/           ← copy-paste checks for docs, code, UI, APIs, DB, security
+├── Cost and Observability/         ← tokens, latency, traces, retries, and stop rules
+├── Model Selection/                ← choosing model/reasoning depth by task risk
+├── Prompt Library/                 ← ready-to-copy prompts for common workflows
 ├── Design Process/                 ← the 7-stage "real design process" for building UIs
 ├── Common Mistakes/                ← mistakes + the fix for each
 │
 │   # Doing it safely
 ├── Git and PR Workflow/            ← branch, review, commit, PR — without footguns
 ├── Security Guardrails/            ← the non-negotiables
+├── Release and Deployment/         ← release, deploy, rollback, and post-deploy checks
+├── Database Change Workflow/       ← safe migrations, rollback, and data-change guardrails
+├── AI Coding Standards/            ← standards for agent-written code
+├── Failure Postmortems/            ← turning agent failures into guardrails
 ├── Troubleshooting and FAQ/        ← "it's not working" → fixes
 │
 │   # Setting up projects
 ├── CLAUDE.md Best Practices/       ← the 10 standard sections + a fill-in template
 ├── Claude Directory Layout/        ← the .claude/ tree: agents, commands, hooks, settings.json
 ├── Project Setup Checklist/        ← make a new project agent-ready
+├── Team Adoption/                  ← rolling Claude Code out across a team
 └── 10 Levels of Claude Code/       ← the full progression: terminal → routines
 ```
 
@@ -110,16 +127,33 @@ Keep entries:
 | [Subagents](./Subagents/) | Delegating to subagents: the global subagent roster, when to use each role, and how to invoke them solo or in parallel |
 | [Loop Engineering](./Loop%20Engineering/) | How to design safe agent loops: goals, verifiers, retry caps, subagents, hooks, examples, and anti-patterns |
 | [Harness](./Harness/) | How to build agent/eval harnesses: fixtures, tools, graders, traces, metrics, CI patterns, and examples |
+| [MCP Playbook](./MCP%20Playbook/) | Connect Claude Code to external tools/data safely: scopes, auth, examples, and guardrails |
+| [Plugins Playbook](./Plugins%20Playbook/) | Review, install, share, and govern plugins |
+| [Memory & Context](./Memory%20and%20Context/) | What belongs in prompts, `CLAUDE.md`, memory, handoffs, skills, and docs |
+| [Worktrees & Parallel Agents](./Worktrees%20and%20Parallel%20Agents/) | Run isolated parallel attempts and compare outputs safely |
+| [Headless & CI](./Headless%20and%20CI/) | Use Claude Code non-interactively in scripts, CI, and scheduled workflows |
+| [Hooks Cookbook](./Hooks%20Cookbook/) | Practical hook recipes: block risky actions, log tools, run focused gates |
+| [Agent Team Patterns](./Agent%20Team%20Patterns/) | Multi-agent topologies: planner, builder, reviewer, tester, judge |
+| [Spec to Implementation](./Spec%20to%20Implementation/) | Turn an issue, PRD, or brief into tasks, code, tests, review, and PR |
+| [Verification Recipes](./Verification%20Recipes/) | Copy-paste verification checklists for docs, code, UI, APIs, DB, and security |
+| [Cost & Observability](./Cost%20and%20Observability/) | Track cost, latency, retries, traces, pass rates, and stop conditions |
+| [Model Selection](./Model%20Selection/) | Pick model strength and reasoning depth by task risk and cost |
+| [Prompt Library](./Prompt%20Library/) | Ready-to-copy prompts for common Claude Code workflows |
 | [Design Process](./Design%20Process/) | The 7-stage "real design process" (grill → brief → IA → tokens → tasks → build → review) for building UIs intentionally |
 | [Common Mistakes](./Common%20Mistakes/) | Mistakes I've made working with Claude + the fix for each |
 | **Doing it safely** | |
 | [Git & PR Workflow](./Git%20and%20PR%20Workflow/) | Branch, review the diff, commit, open a PR — without footguns |
 | [Security Guardrails](./Security%20Guardrails/) | The non-negotiables: secrets, destructive commands, prod, never weaken security |
+| [Release & Deployment](./Release%20and%20Deployment/) | Safe agent-assisted releases: changelog, staging, rollback, deploy approval, checks |
+| [Database Change Workflow](./Database%20Change%20Workflow/) | Migrations, rollback, large-table safety, and production data guardrails |
+| [AI Coding Standards](./AI%20Coding%20Standards/) | Standards for agent-written code: scope, tests, deps, comments, review |
+| [Failure Postmortems](./Failure%20Postmortems/) | Turn agent mistakes into prompts, harnesses, hooks, and guardrails |
 | [Troubleshooting & FAQ](./Troubleshooting%20and%20FAQ/) | Common "it's not working" situations and their fixes |
 | **Setting up projects** | |
 | [CLAUDE.md Best Practices](./CLAUDE.md%20Best%20Practices/) | The 10 standard sections + a ready-to-use template |
 | [Claude Directory Layout](./Claude%20Directory%20Layout/) | The `.claude/` tree explained: agents, commands, hooks, skills, settings.json — with verified field names |
 | [Project Setup Checklist](./Project%20Setup%20Checklist/) | Steps to make a new project agent-ready from the first prompt |
+| [Team Adoption](./Team%20Adoption/) | Team rollout plan, shared policy, review norms, and governance |
 | [10 Levels of Claude Code](./10%20Levels%20of%20Claude%20Code/) | The full progression from terminal use to scheduled routines, with use cases and "what to add next" at each level |
 
 _More topics added over time._

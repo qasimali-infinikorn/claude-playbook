@@ -52,6 +52,12 @@ Plain-English definitions of the terms you'll hear when working with Claude and 
 
 **Harness** — a controlled test rig for an agent workflow: task, fixture, allowed tools, denied actions, verifier, trace, report, and baseline. → `../Harness/`
 
+**Plugin** — a packaged extension that can install commands, skills, hooks, MCP server configuration, or other reusable Claude Code behavior. → `../Plugins Playbook/`
+
+**Worktree** — an extra checkout of the same git repository, usually on a different branch, useful for isolated parallel attempts. → `../Worktrees and Parallel Agents/`
+
+**Headless mode** — running Claude Code non-interactively from a command, script, CI job, or schedule instead of an interactive terminal session. → `../Headless and CI/`
+
 ---
 
 ## Quality & workflow
