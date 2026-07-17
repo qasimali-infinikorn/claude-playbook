@@ -53,6 +53,7 @@ claude-playbook/
 ├── Harness/                        ← building agent/eval harnesses for repeatable evidence
 ├── MCP Playbook/                   ← connecting Claude Code to external tools safely
 ├── Plugins Playbook/               ← installing, reviewing, and sharing plugins
+├── Shannon/                        ← autonomous white-box AI pentesting, setup, safety, and examples
 ├── Memory and Context/             ← managing CLAUDE.md, memory, handoffs, and context hygiene
 ├── Worktrees and Parallel Agents/  ← isolated branches for parallel attempts
 ├── Headless and CI/                ← non-interactive Claude Code, CI, and scheduled automation
@@ -131,6 +132,7 @@ Keep entries:
 | [Harness](./Harness/) | How to build agent/eval harnesses: fixtures, tools, graders, traces, metrics, CI patterns, and examples |
 | [MCP Playbook](./MCP%20Playbook/) | Connect Claude Code to external tools/data safely: scopes, auth, examples, and guardrails |
 | [Plugins Playbook](./Plugins%20Playbook/) | Review, install, share, and govern plugins |
+| [Shannon](./Shannon/) | Autonomous white-box AI pentesting: architecture, safe setup, configuration, examples, reports, and limits |
 | [Memory & Context](./Memory%20and%20Context/) | What belongs in prompts, `CLAUDE.md`, memory, handoffs, skills, and docs |
 | [Worktrees & Parallel Agents](./Worktrees%20and%20Parallel%20Agents/) | Run isolated parallel attempts and compare outputs safely |
 | [Headless & CI](./Headless%20and%20CI/) | Use Claude Code non-interactively in scripts, CI, and scheduled workflows |
