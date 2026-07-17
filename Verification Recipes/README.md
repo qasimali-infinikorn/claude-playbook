@@ -99,6 +99,26 @@ Checklist:
 
 ---
 
+## Scope Verification
+
+Before committing or opening a PR:
+
+```bash
+git diff --name-status
+git diff --stat
+git diff --check
+```
+
+- [ ] Every changed file traces to the request or a necessary supporting change.
+- [ ] Dependencies, schema, configuration, permissions, CI, and generated files are reviewed explicitly.
+- [ ] Drive-by cleanup is reverted or split into another change.
+- [ ] Risky expansion has human approval.
+- [ ] The retained diff still passes its verifier.
+
+Use the full [`Scope Creep Detection`](../Scope%20Creep%20Detection/) workflow for multi-file or high-risk changes.
+
+---
+
 ## Prompt
 
 ```text
@@ -120,3 +140,4 @@ Do not claim success without evidence.
 - [`../Harness/`](../Harness/)
 - [`../Common Mistakes/`](../Common%20Mistakes/)
 - [`../Security Guardrails/`](../Security%20Guardrails/)
+- [`../Scope Creep Detection/`](../Scope%20Creep%20Detection/)

@@ -87,6 +87,8 @@ Every Monday:
 4. Do not merge.
 ```
 
+For recurring production-style operation, a schedule is only the trigger. Add durable checkpoints, idempotency keys, leases, bounded retries, dead-letter handling, heartbeats, cost limits, and approval gates. See [`Always-On Agent Operations`](../Always-On%20Agent%20Operations/).
+
 ---
 
 ## Prompt Template
@@ -135,5 +137,6 @@ If blocked, return BLOCKED with reason and do not guess.
 - [`../Harness/`](../Harness/)
 - [`../Loop Engineering/`](../Loop%20Engineering/)
 - [`../Git and PR Workflow/`](../Git%20and%20PR%20Workflow/)
+- [`../Always-On Agent Operations/`](../Always-On%20Agent%20Operations/)
 - [Claude Code GitHub Actions docs](https://code.claude.com/docs/en/github-actions)
 - [Claude Code SDK docs](https://code.claude.com/docs/en/agent-sdk/overview)

@@ -61,6 +61,9 @@ claude-playbook/
 ├── Agent Team Patterns/            ← planner/builder/reviewer/tester/judge topologies
 ├── AI Agent Patterns/              ← single agents, routers, pipelines, RAG, always-on, UI, and voice
 ├── RAG Failure Diagnostics/        ← trace-first taxonomy and debugging workflow for grounded systems
+├── Scope Creep Detection/          ← compare requested intent with the complete diff
+├── Always-On Agent Operations/     ← durable state, idempotency, retries, gates, and observability
+├── Eval-Driven Skill Improvement/  ← improve skills through measured, reversible experiments
 ├── Spec to Implementation/         ← turning issues and specs into verified PRs
 ├── Verification Recipes/           ← copy-paste checks for docs, code, UI, APIs, DB, security
 ├── Cost and Observability/         ← tokens, latency, traces, retries, and stop rules
@@ -142,6 +145,9 @@ Keep entries:
 | [Agent Team Patterns](./Agent%20Team%20Patterns/) | Multi-agent topologies: planner, builder, reviewer, tester, judge |
 | [AI Agent Patterns](./AI%20Agent%20Patterns/) | Framework-neutral patterns for tool agents, routers, pipelines, parallel work, RAG, always-on, UI, and voice |
 | [RAG Failure Diagnostics](./RAG%20Failure%20Diagnostics/) | Trace-first failure taxonomy, decision tree, fixtures, graders, and operational checks for RAG systems |
+| [Scope Creep Detection](./Scope%20Creep%20Detection/) | Compare request intent with the complete diff and split or escalate unrelated expansion |
+| [Always-On Agent Operations](./Always-On%20Agent%20Operations/) | Operate scheduled and event-driven agents with durable state, idempotency, retries, gates, and monitoring |
+| [Eval-Driven Skill Improvement](./Eval-Driven%20Skill%20Improvement/) | Improve skills using baselines, held-out evals, one measured mutation, human review, and rollback |
 | [Spec to Implementation](./Spec%20to%20Implementation/) | Turn an issue, PRD, or brief into tasks, code, tests, review, and PR |
 | [Verification Recipes](./Verification%20Recipes/) | Copy-paste verification checklists for docs, code, UI, APIs, DB, and security |
 | [Cost & Observability](./Cost%20and%20Observability/) | Track cost, latency, retries, traces, pass rates, and stop conditions |

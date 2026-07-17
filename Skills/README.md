@@ -262,6 +262,8 @@ Record commands, outputs, changed files, runtime, and model/token cost.
 
 Source inspiration: the evidence-first quality bar in [Awesome LLM Apps agent skills](https://github.com/Shubhamsaboo/awesome-llm-apps/tree/main/agent_skills). This checklist is adapted for the permission and verification practices in this playbook.
 
+When an installed skill needs improvement, use the measured and reversible workflow in [`../Eval-Driven Skill Improvement/`](../Eval-Driven%20Skill%20Improvement/) instead of letting it rewrite itself in place.
+
 ---
 
 ## How to discover more
