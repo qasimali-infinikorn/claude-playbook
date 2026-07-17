@@ -26,6 +26,92 @@ A curated list of the Claude / Claude Code **skills** I reach for most — what 
 
 ## 🧠 Planning & Thinking
 
+### `/goal` (built-in Claude Code command)
+**What:** Sets a measurable completion condition and keeps Claude working across turns until a separate evaluator decides that condition is satisfied. It is built into Claude Code 2.1.139 and newer—there is no skill or plugin to install.
+**When:** Use it for substantial work with an objective end state: finishing a migration until the build passes, implementing every acceptance criterion in a spec, reducing files below a size limit, or clearing a defined issue queue.
+**Avoid when:** The task needs subjective approval, has no reliable verifier, can cause uncontrolled external side effects, or requires decisions only you can make.
+
+#### Basic usage
+
+Set one completion condition for the current session:
+
+```text
+/goal all tests in test/auth pass and npm run lint exits 0
+```
+
+Setting the goal starts work immediately; you do not need to send another prompt. If a goal is already active, a new `/goal <condition>` replaces it.
+
+Check its condition, elapsed time, evaluated turns, token use, and latest evaluator reason:
+
+```text
+/goal
+```
+
+Stop it before completion:
+
+```text
+/goal clear
+```
+
+`stop`, `off`, `reset`, `none`, and `cancel` also work in place of `clear`. Starting a fresh conversation with `/clear` removes the active goal too.
+
+#### Write a good completion condition
+
+A useful goal contains three things:
+
+1. **Measurable result** — what must be true when the work is done.
+2. **Verifier** — the command, output, count, or other evidence that proves it.
+3. **Constraints and stop bound** — what must not change and when to stop if blocked.
+
+```text
+/goal migrate src/auth from the legacy client to AuthClient; npm test -- auth and npm run typecheck both exit 0; do not change public API behavior or edit unrelated test files; stop after 15 turns if the checks still fail and report the blocker
+```
+
+The evaluator does not run commands or inspect files itself. It judges only evidence Claude surfaces in the conversation, so tell Claude which checks to run and require their results in the transcript. Conditions may be up to 4,000 characters.
+
+**Weak:**
+
+```text
+/goal improve the codebase
+```
+
+There is no observable definition of "improve," so the evaluator cannot reliably know when to stop.
+
+**Better:**
+
+```text
+/goal split src/api.ts into focused modules of at most 300 lines each; npm test and npm run typecheck exit 0; preserve exported APIs; stop after 12 turns and summarize any blocker
+```
+
+#### Non-interactive use
+
+`/goal` also works with print mode, completing the loop in one CLI invocation:
+
+```bash
+claude -p "/goal CHANGELOG.md contains an entry for every PR merged this week, verified against the git log; stop after 10 turns if repository evidence is insufficient"
+```
+
+Press `Ctrl+C` to interrupt it. An active goal is restored when you resume the session with `claude --resume` or `claude --continue`, although its timer, turn count, and token baseline reset.
+
+#### How it works and what it costs
+
+After each main turn, Claude Code sends the condition and conversation to the configured small, fast model (Haiku by default). A "no" decision starts another turn and supplies the evaluator's reason as guidance; a "yes" decision records the goal as achieved and clears it. Those evaluator calls use tokens in addition to the main work, though they are normally much smaller.
+
+Only one goal can be active per session. `/goal` requires a trusted workspace and the hooks system; managed settings such as `disableAllHooks` can make it unavailable.
+
+#### `/goal` vs related features
+
+| Feature | Starts another turn when | Stops when |
+|---|---|---|
+| `/goal` | The previous turn ends | A separate model confirms the condition |
+| `/loop` | A scheduled interval elapses | You stop it or Claude decides it is done |
+| Stop hook | The previous turn ends | Your reusable script or prompt says to stop |
+| Auto mode | Does not start extra turns | Claude's current turn finishes |
+
+Use `/goal` for a session-specific outcome. Use `/loop` for recurring time-based work, a Stop hook for reusable deterministic policy, and auto mode to reduce tool-approval interruptions inside a turn. Auto mode and `/goal` can complement each other, but permission changes do not broaden what the task is authorized to do.
+
+**Source:** [Official Claude Code `/goal` documentation](https://code.claude.com/docs/en/goal)
+
 ### `grill-me` (`/grill-me` or `/cs:grill-me <plan>`)
 **What:** A relentless plan/design interrogator. Walks the decision tree one branch at a time, asks **one question per turn** with a recommended answer + rationale, and explores the codebase before asking.
 **When:** You want to stress-test a plan or design *before* building — surfaces the decisions you haven't made yet.
