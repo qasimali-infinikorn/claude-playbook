@@ -59,6 +59,8 @@ claude-playbook/
 ├── Headless and CI/                ← non-interactive Claude Code, CI, and scheduled automation
 ├── Hooks Cookbook/                 ← practical hook recipes and safety gates
 ├── Agent Team Patterns/            ← planner/builder/reviewer/tester/judge topologies
+├── AI Agent Patterns/              ← single agents, routers, pipelines, RAG, always-on, UI, and voice
+├── RAG Failure Diagnostics/        ← trace-first taxonomy and debugging workflow for grounded systems
 ├── Spec to Implementation/         ← turning issues and specs into verified PRs
 ├── Verification Recipes/           ← copy-paste checks for docs, code, UI, APIs, DB, security
 ├── Cost and Observability/         ← tokens, latency, traces, retries, and stop rules
@@ -138,6 +140,8 @@ Keep entries:
 | [Headless & CI](./Headless%20and%20CI/) | Use Claude Code non-interactively in scripts, CI, and scheduled workflows |
 | [Hooks Cookbook](./Hooks%20Cookbook/) | Practical hook recipes: block risky actions, log tools, run focused gates |
 | [Agent Team Patterns](./Agent%20Team%20Patterns/) | Multi-agent topologies: planner, builder, reviewer, tester, judge |
+| [AI Agent Patterns](./AI%20Agent%20Patterns/) | Framework-neutral patterns for tool agents, routers, pipelines, parallel work, RAG, always-on, UI, and voice |
+| [RAG Failure Diagnostics](./RAG%20Failure%20Diagnostics/) | Trace-first failure taxonomy, decision tree, fixtures, graders, and operational checks for RAG systems |
 | [Spec to Implementation](./Spec%20to%20Implementation/) | Turn an issue, PRD, or brief into tasks, code, tests, review, and PR |
 | [Verification Recipes](./Verification%20Recipes/) | Copy-paste verification checklists for docs, code, UI, APIs, DB, and security |
 | [Cost & Observability](./Cost%20and%20Observability/) | Track cost, latency, retries, traces, pass rates, and stop conditions |

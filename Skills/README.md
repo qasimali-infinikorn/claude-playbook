@@ -190,6 +190,80 @@ These auto-trigger when you mention the file type, or invoke by name.
 
 ---
 
+## How to evaluate a skill before installing it
+
+A skill is executable influence over an agent that may already have access to your shell, files, credentials, and external tools. Treat it like software, not like a harmless prompt.
+
+### The quality bar
+
+| Check | Good evidence | Warning sign |
+|---|---|---|
+| Clear job | One specific workflow and an explicit definition of done | Vague claims that it makes the agent "better" at everything |
+| Real leverage | Deterministic scripts, templates, references, or domain knowledge | A long prompt repeating advice the model already knows |
+| Progressive loading | Small `SKILL.md`; supporting detail loaded only when needed | Huge instructions injected into every matching turn |
+| Verifiable claims | Commands, fixtures, expected outputs, or cited sources | Testimonials, benchmark numbers, or safety claims with no evidence |
+| Declared effects | Files, network calls, subprocesses, and credentials are named | Hidden downloads, telemetry, or shell execution |
+| Least privilege | Read-only first; narrow tools and paths | Broad filesystem, network, or write access for a narrow job |
+| Failure behavior | Retry cap, cleanup path, and honest blocked state | Infinite loops, swallowed errors, or "continue until done" without limits |
+| Tests or evals | Representative fixtures and an executable pass/fail check | Only a polished README or happy-path demo |
+| Maintenance | Version, source, license, and recent verification date | Unpinned dependencies and no indication of compatibility |
+
+### Review procedure
+
+1. Read `SKILL.md` completely.
+2. Follow every referenced script, template, hook, MCP configuration, and executable file.
+3. Search for network calls, package installation, destructive commands, secrets access, and writes outside the project.
+4. Check what triggers the skill; an over-broad description may activate it unexpectedly.
+5. Inspect its dependencies and license.
+6. Run its evals in a sandbox or disposable repository.
+7. Try one representative success case and one failure case.
+8. Install locally first. Promote it to project/team scope only after it proves useful.
+9. Record the version, source, purpose, permissions, and removal command.
+
+Useful inspection commands after cloning a candidate skill:
+
+```bash
+rg --files path/to/skill
+rg -n "curl|wget|fetch\(|requests\.|subprocess|child_process|rm |sudo|\.env|API_KEY" path/to/skill
+```
+
+These searches are leads, not a security verdict. Read the code around every match.
+
+### Minimal skill eval
+
+```md
+# Eval: <skill-name>
+
+## Fixture
+A disposable repository or input representing normal use.
+
+## Task
+The exact request that should trigger the skill.
+
+## Pass
+- Expected artifact exists.
+- Required verifier exits 0.
+- No file outside the allowed paths changed.
+- No undeclared network or external action occurred.
+
+## Failure case
+Give it missing credentials, invalid input, or a failing verifier.
+It must stop clearly without fabricating success or damaging state.
+
+## Evidence
+Record commands, outputs, changed files, runtime, and model/token cost.
+```
+
+### Installation decision
+
+- **Install:** unique value, narrow permissions, reviewed code, representative eval passes.
+- **Adapt locally:** useful idea, but triggers, permissions, dependencies, or output format need tightening.
+- **Do not install:** hidden effects, unverifiable claims, excessive access, unsafe failure behavior, or no value beyond generic prompting.
+
+Source inspiration: the evidence-first quality bar in [Awesome LLM Apps agent skills](https://github.com/Shubhamsaboo/awesome-llm-apps/tree/main/agent_skills). This checklist is adapted for the permission and verification practices in this playbook.
+
+---
+
 ## How to discover more
 
 - Type `/` in Claude Code to see available slash commands/skills.
