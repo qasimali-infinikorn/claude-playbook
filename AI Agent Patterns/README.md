@@ -4,6 +4,8 @@ Start with the smallest pattern that can complete the job and prove it. A single
 
 This guide is framework-neutral. The same patterns can be implemented with Claude Code, an agent SDK, a workflow engine, or a small application around an LLM API.
 
+Different ecosystems use different names for the same coordination shapes. See [`Agent Orchestration Terminology`](../Agent%20Orchestration%20Terminology/) for a vendor-by-vendor translation.
+
 ---
 
 ## Choose a Pattern
@@ -291,3 +293,4 @@ Main failure: executing a high-impact action from misheard speech. Read back cri
 - [`../MCP Playbook/`](../MCP%20Playbook/)
 - [`../RAG Failure Diagnostics/`](../RAG%20Failure%20Diagnostics/)
 - [`../Cost and Observability/`](../Cost%20and%20Observability/)
+- [`../Agent Orchestration Terminology/`](../Agent%20Orchestration%20Terminology/)

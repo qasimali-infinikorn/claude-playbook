@@ -144,6 +144,13 @@ These auto-trigger when you mention the file type, or invoke by name.
 
 ## ⚙️ Workflow & Productivity
 
+### `caveman` (`/caveman [lite|full|ultra]`) — optional third-party skill
+**What:** Compresses user-facing agent prose while preserving technical literals such as code, commands, paths, URLs, and errors. The upstream benchmark claims about 65% fewer **output** tokens on ten prompts, not 65% lower total session cost.
+**When:** Experienced users want terse status, review, or implementation summaries and have measured that brevity does not reduce correctness.
+**Avoid when:** Teaching, architecture rationale, incident/security communication, public documentation, or any task where omitted context is riskier than extra tokens.
+**Before installing:** Audit the [CAVEMAN repository](https://github.com/JuliusBrussee/caveman), hooks, scripts, manifests, and install/uninstall behavior. Run an A/B eval; the skill itself adds context and may cost more on already-terse workloads.
+**Details:** See [`../Cost and Observability/#caveman-output-brevity-as-a-cost-control`](../Cost%20and%20Observability/#caveman-output-brevity-as-a-cost-control).
+
 ### `handoff` (`/cs:handoff <next-focus>`)
 **What:** Compacts the current conversation into a handoff document for a fresh agent — references PRDs/issues instead of copying them, and recommends skills for the next session.
 **When:** Ending a session, switching machines, or passing work to another agent (or a future you).

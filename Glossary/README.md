@@ -48,6 +48,10 @@ Plain-English definitions of the terms you'll hear when working with Claude and 
 
 **Subagent** — a separate agent Claude can spawn to handle a focused task in its own context, then report back.
 
+**Agent orchestration** — the control layer deciding which agent or tool runs, in what order, with what context, limits, verification, and aggregation. Vendors also use terms such as workflow, manager, supervisor, handoff, crew/process, flow, router, and agent team for particular coordination patterns. → `../Agent Orchestration Terminology/`
+
+**Obsidian vault** — a local folder of Markdown notes plus an `.obsidian/` configuration directory. Because notes are ordinary files, coding agents can work with them when permissions and privacy boundaries are explicit. → `../Obsidian/`
+
 **Loop engineering** — designing a repeatable agent workflow with a clear goal, verifier, boundaries, retry cap, and human gate. It turns "keep prompting the agent" into a controlled feedback loop. → `../Loop Engineering/`
 
 **Harness** — a controlled test rig for an agent workflow: task, fixture, allowed tools, denied actions, verifier, trace, report, and baseline. → `../Harness/`

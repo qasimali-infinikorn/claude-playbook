@@ -163,6 +163,230 @@ This taxonomy is adapted from the [Awesome LLM Apps RAG Failure Diagnostics Clin
 
 ---
 
+## Case Study: Retrieve, Constrain, Verify, Abstain
+
+Fareed Khan's June 2026 article, [“Building a RAG Pipeline for 10M+ Documents With Near-Zero Hallucination”](https://levelup.gitconnected.com/building-a-rag-pipeline-for-10m-documents-with-near-zero-hallucination-788e4b5b7f25), presents a useful evidence-first architecture summarized by four verbs:
+
+![Enterprise RAG pipeline showing ingestion, hybrid retrieval, constrained generation, claim verification, corrective retrieval, calibrated abstention, evaluation, and scale benchmarking.](./rag-pipeline-retrieve-constrain-verify-abstain.webp)
+
+_Architecture diagram by [Fareed Khan](https://levelup.gitconnected.com/building-a-rag-pipeline-for-10m-documents-with-near-zero-hallucination-788e4b5b7f25), downloaded from the image URL supplied for this playbook. The benchmark values shown belong to the article's example configuration._
+
+```text
+retrieve → constrain → verify → answer or abstain
+```
+
+Treat **“near-zero hallucination” as the article's benchmark claim, not a portable guarantee**. Reliability depends on corpus, question distribution, graders, thresholds, model, and operational environment. The reusable value is the layered control design.
+
+### 1. Make ingestion reproducible
+
+The reference pipeline begins with a known corpus, inspection and sampling, and fixed random seeds. It then applies:
+
+- Unicode NFKC normalization.
+- Near-duplicate removal using MinHash LSH.
+- Structure-aware chunking.
+- A contextual prefix that explains where a chunk came from.
+
+Record the transformation lineage:
+
+```json
+{
+  "document_id": "doc-42",
+  "source_hash": "sha256:...",
+  "normalizer_version": "nfkc-v1",
+  "dedup_cluster": "cluster-817",
+  "chunker_version": "structure-v3",
+  "chunk_id": "doc-42#section-3#chunk-2",
+  "context_prefix": "Section: Authentication > Session expiration"
+}
+```
+
+Without lineage, a good retrieval result cannot be reproduced after re-ingestion.
+
+### 2. Combine sparse and dense retrieval
+
+The article's architecture uses a hybrid index—dense vectors plus BM25—then combines rankings with Reciprocal Rank Fusion (RRF). A reranker narrows a broad candidate pool before generation; the diagram shows 150 candidates reduced to 20.
+
+```text
+dense retrieval ─┐
+                  ├→ RRF fusion → rerank → context candidates
+sparse BM25 ──────┘
+```
+
+The numbers are tuning parameters, not defaults. Select candidate and context counts from recall, latency, cost, and context-noise measurements on your data.
+
+Diagnose each layer separately:
+
+| Layer | Question |
+|---|---|
+| Dense | Did semantic neighbors include the answer-bearing document? |
+| Sparse | Did exact entities, codes, dates, or phrases match? |
+| Fusion | Did combining ranks promote relevant evidence? |
+| Reranker | Did it retain and correctly order the evidence? |
+| Context selection | Did token budgeting remove a necessary passage? |
+
+### 3. Route by question shape
+
+The depicted router classifies questions into:
+
+- No retrieval needed.
+- Single-hop retrieval.
+- Multi-hop retrieval with decomposition.
+- False-premise detection.
+
+This avoids forcing every query through the same expensive path. The route is itself a failure point, so log it with confidence and allow a safe fallback.
+
+```json
+{
+  "route": "multi_hop",
+  "confidence": 0.84,
+  "subquestions": [
+    "Which organization authored policy X?",
+    "What retention period does that organization specify?"
+  ],
+  "false_premise_detected": false
+}
+```
+
+A false-premise detector should surface the questionable premise and evidence; it should not silently rewrite the user's question.
+
+### 4. Grade evidence and re-retrieve
+
+The Corrective RAG (CRAG) loop in the diagram grades retrieved evidence, refines the query when evidence is weak, and re-retrieves with a hop cap of three.
+
+```text
+retrieve → grade evidence
+              ├─ sufficient → generate
+              └─ weak → refine query → retrieve again
+```
+
+Bound the loop. Each retry should state what was missing and change the retrieval hypothesis. Repeating the same query three times is not corrective retrieval.
+
+Example evidence-grade schema:
+
+```json
+{
+  "sufficient": false,
+  "missing": ["effective date", "issuing authority"],
+  "supported_subquestions": [0],
+  "unsupported_subquestions": [1],
+  "next_query": "policy X retention period effective date issuing authority"
+}
+```
+
+### 5. Constrain generation
+
+The reference design requires answers to come only from supplied context, associates citations with sentences, and removes invalid citations.
+
+Enforce this structurally:
+
+- Give the model only approved evidence IDs.
+- Require claims to reference those IDs.
+- Reject unknown or malformed citations.
+- Check that cited passages entail the claim.
+- Do not treat citation presence as citation correctness.
+
+```json
+{
+  "sentences": [
+    {
+      "text": "The policy takes effect on August 1, 2026.",
+      "evidence_ids": ["doc-42#section-3#chunk-2"]
+    }
+  ]
+}
+```
+
+### 6. Verify every claim
+
+The diagram separates atomic-claim extraction, a faithfulness judge, and chain-of-verification. This is stronger than assigning one score to the whole answer.
+
+```text
+answer
+  ↓
+atomic claims
+  ↓
+claim × cited evidence entailment
+  ↓
+independent verification questions
+  ↓
+supported / unsupported / conflicting
+```
+
+Store the verdict per claim. Unsupported claims can be removed or trigger another retrieval pass; conflicting evidence should be shown rather than averaged away.
+
+### 7. Calibrate abstention
+
+The system should return a cited answer only above an evidence threshold; otherwise it returns an explicit insufficient-evidence result.
+
+```json
+{
+  "status": "insufficient_evidence",
+  "answer": null,
+  "missing": ["A primary source confirming the effective date"],
+  "retrieval_attempts": 3
+}
+```
+
+Choose the threshold from a **risk-coverage curve**:
+
+- Coverage: percentage of questions the system answers.
+- Risk: error rate among answered questions.
+
+Raising the threshold usually lowers coverage and lowers error. The right point depends on the cost of a wrong answer versus a refusal.
+
+### 8. Evaluate claims, routes, retrieval, and abstention
+
+The article's diagram shows a 200-question golden set, confusion-matrix analysis, and reported faithfulness/recall figures for its setup. Those figures belong to that benchmark; they do not establish production performance for another corpus.
+
+Build evaluation slices for:
+
+| Slice | What to measure |
+|---|---|
+| No-retrieval questions | Correct route; no unnecessary retrieval cost |
+| Single-hop | Recall@k and supported answer accuracy |
+| Multi-hop | Subquestion coverage and complete evidence chain |
+| False premise | Premise identified without inventing correction |
+| Unanswerable | Correct abstention rate |
+| Adversarial evidence | Resistance to conflicting or injected text |
+| Freshness | Correct behavior before and after index update |
+
+Use a confusion matrix for answer/abstain decisions:
+
+| | Evidence actually sufficient | Evidence actually insufficient |
+|---|---|---|
+| System answers | Correct coverage or wrong/unsupported answer | Dangerous over-answer |
+| System abstains | Missed opportunity | Correct safe refusal |
+
+### 9. Separate quality scaling from infrastructure scaling
+
+The supplied diagram also shows disk-backed vector scale, approximate nearest-neighbor indexing, and latency projections. Validate those claims on your hardware and workload. A fast vector lookup does not include parsing, BM25, fusion, reranking, model inference, verification, network, or queue time.
+
+Report:
+
+- Corpus documents, chunks, and index bytes.
+- Index build/update time.
+- Retrieval p50/p95/p99 latency.
+- End-to-end p50/p95/p99 latency.
+- Recall and faithfulness at each scale.
+- Memory, disk, GPU, and model cost.
+- Freshness lag and failure recovery.
+
+### Production checklist for this architecture
+
+- [ ] Ingestion is versioned and reproducible.
+- [ ] Deduplication preserves traceable canonical sources.
+- [ ] Sparse, dense, fusion, reranking, and context stages are evaluated independently.
+- [ ] Route and decomposition decisions are logged.
+- [ ] Weak evidence triggers a bounded, changed retrieval attempt.
+- [ ] Generation can cite only supplied evidence IDs.
+- [ ] Every material claim receives a support verdict.
+- [ ] Abstention threshold is calibrated from representative data.
+- [ ] Reported benchmark numbers are scoped to dataset and configuration.
+- [ ] Scale tests measure end-to-end behavior, not vector lookup alone.
+- [ ] “Near-zero hallucination” is never presented as a universal guarantee.
+
+---
+
 ## Diagnostic Decision Tree
 
 ```text
