@@ -56,7 +56,9 @@ Plain-English definitions of the terms you'll hear when working with Claude and 
 
 **Harness** — a controlled test rig for an agent workflow: task, fixture, allowed tools, denied actions, verifier, trace, report, and baseline. → `../Harness/`
 
-**Plugin** — a packaged extension that can install commands, skills, hooks, MCP server configuration, or other reusable Claude Code behavior. → `../Plugins Playbook/`
+**Plugin** — a self-contained Claude Code extension package. It can contain skills, agents, hooks, MCP servers, LSP servers, and monitors. A plugin is a distribution unit; it is not another name for MCP. → `../Plugins Playbook/`
+
+**Plugin marketplace** — a catalog used to discover, install, and update plugins. Adding a marketplace registers its catalog but does not install every plugin inside it. → `../Plugins Playbook/`
 
 **Worktree** — an extra checkout of the same git repository, usually on a different branch, useful for isolated parallel attempts. → `../Worktrees and Parallel Agents/`
 

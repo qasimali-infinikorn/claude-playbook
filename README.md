@@ -52,7 +52,7 @@ claude-playbook/
 ├── Loop Engineering/               ← designing safe, repeatable agent feedback loops
 ├── Harness/                        ← building agent/eval harnesses for repeatable evidence
 ├── MCP Playbook/                   ← connecting Claude Code to external tools safely
-├── Plugins Playbook/               ← installing, reviewing, and sharing plugins
+├── Plugins Playbook/               ← choosing, evaluating, installing, governing, and removing plugins
 ├── Shannon/                        ← autonomous white-box AI pentesting, setup, safety, and examples
 ├── Memory and Context/             ← managing CLAUDE.md, memory, handoffs, and context hygiene
 ├── Worktrees and Parallel Agents/  ← isolated branches for parallel attempts
@@ -138,7 +138,7 @@ Keep entries:
 | [Loop Engineering](./Loop%20Engineering/) | How to design safe agent loops: goals, verifiers, retry caps, subagents, hooks, examples, and anti-patterns |
 | [Harness](./Harness/) | How to build agent/eval harnesses: fixtures, tools, graders, traces, metrics, CI patterns, and examples |
 | [MCP Playbook](./MCP%20Playbook/) | Connect Claude Code to external tools/data safely: scopes, auth, examples, and guardrails |
-| [Plugins Playbook](./Plugins%20Playbook/) | Review, install, share, and govern plugins |
+| [Plugins Playbook](./Plugins%20Playbook/) | Understand plugin architecture; choose, evaluate, install, govern, troubleshoot, and remove plugins safely |
 | [Shannon](./Shannon/) | Autonomous white-box AI pentesting: architecture, safe setup, configuration, examples, reports, and limits |
 | [Memory & Context](./Memory%20and%20Context/) | What belongs in prompts, `CLAUDE.md`, memory, handoffs, skills, and docs |
 | [Worktrees & Parallel Agents](./Worktrees%20and%20Parallel%20Agents/) | Run isolated parallel attempts and compare outputs safely |
