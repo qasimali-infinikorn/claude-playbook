@@ -46,6 +46,8 @@ Plain-English definitions of the terms you'll hear when working with Claude and 
 
 **MCP server** — a connector that exposes a tool/service to Claude over MCP (e.g. the Figma MCP server lets Claude read/write designs).
 
+**Connectivity stack** — the combined interfaces an agent uses to work: skills encode procedure, MCP exposes structured remote tools and data, and CLI programs provide scriptable local execution. These layers complement rather than replace one another. → `../MCP Playbook/`
+
 **Subagent** — a separate agent Claude can spawn to handle a focused task in its own context, then report back.
 
 **Agent orchestration** — the control layer deciding which agent or tool runs, in what order, with what context, limits, verification, and aggregation. Vendors also use terms such as workflow, manager, supervisor, handoff, crew/process, flow, router, and agent team for particular coordination patterns. → `../Agent Orchestration Terminology/`
