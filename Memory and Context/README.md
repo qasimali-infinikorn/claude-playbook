@@ -146,6 +146,7 @@ Group findings into:
 ## See Also
 
 - [`../CLAUDE.md Best Practices/`](../CLAUDE.md%20Best%20Practices/)
+- [`../Codebase Knowledge Graph/`](../Codebase%20Knowledge%20Graph/)
 - [`../Prompting Patterns/`](../Prompting%20Patterns/)
 - [`../Troubleshooting and FAQ/`](../Troubleshooting%20and%20FAQ/)
 - [Claude Code memory docs](https://code.claude.com/docs/en/memory)

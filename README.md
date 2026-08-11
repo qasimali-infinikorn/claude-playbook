@@ -65,6 +65,7 @@ claude-playbook/
 ├── Always-On Agent Operations/     ← durable state, idempotency, retries, gates, and observability
 ├── Eval-Driven Skill Improvement/  ← improve skills through measured, reversible experiments
 ├── Obsidian/                       ← safely use Claude with a Markdown knowledge vault
+├── Codebase Knowledge Graph/       ← OKF bundles that stay fresh via commit-triggered enrichment
 ├── Agent Orchestration Terminology/ ← vendor vocabulary and framework-neutral pattern mapping
 ├── Spec to Implementation/         ← turning issues and specs into verified PRs
 ├── Verification Recipes/           ← copy-paste checks for docs, code, UI, APIs, DB, security
@@ -151,6 +152,7 @@ Keep entries:
 | [Always-On Agent Operations](./Always-On%20Agent%20Operations/) | Operate scheduled and event-driven agents with durable state, idempotency, retries, gates, and monitoring |
 | [Eval-Driven Skill Improvement](./Eval-Driven%20Skill%20Improvement/) | Improve skills using baselines, held-out evals, one measured mutation, human review, and rollback |
 | [Obsidian](./Obsidian/) | Use Claude and Claude Code safely with Markdown vaults, properties, links, templates, audits, and bulk changes |
+| [Codebase Knowledge Graph](./Codebase%20Knowledge%20Graph/) | Cache repo exploration as an OKF bundle: concept types, the `resource` join key, commit-triggered enrichment, trust tiers, lint gates |
 | [Agent Orchestration Terminology](./Agent%20Orchestration%20Terminology/) | Who says orchestration, workflow, supervisor, handoff, crew, flow, swarm, and other names for related coordination patterns |
 | [Spec to Implementation](./Spec%20to%20Implementation/) | Turn an issue, PRD, or brief into tasks, code, tests, review, and PR |
 | [Verification Recipes](./Verification%20Recipes/) | Copy-paste verification checklists for docs, code, UI, APIs, DB, and security |

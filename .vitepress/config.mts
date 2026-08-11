@@ -1,5 +1,18 @@
 import { defineConfig } from 'vitepress'
 
+const siteOrigin = 'https://qasimali-infinikorn.github.io'
+const siteBase = '/claude-playbook/'
+const siteUrl = `${siteOrigin}${siteBase}`
+const socialImage = `${siteUrl}docs-site-preview.png`
+
+function canonicalUrl(page: string) {
+  const route = page
+    .replace(/(^|\/)index\.md$/, '$1')
+    .replace(/\.md$/, '')
+
+  return new URL(route, siteUrl).href
+}
+
 // Every topic folder is `Some Folder Name/README.md` on disk (spaces, README
 // convention — GitHub auto-renders README.md when browsing a folder, so the
 // source files themselves are left untouched). VitePress only builds pages
@@ -36,6 +49,7 @@ for (const dir of [
   'Always-On Agent Operations',
   'Eval-Driven Skill Improvement',
   'Obsidian',
+  'Codebase Knowledge Graph',
   'Agent Orchestration Terminology',
   'Spec to Implementation',
   'Verification Recipes',
@@ -66,12 +80,55 @@ export default defineConfig({
   title: 'Claude Playbook',
   description:
     'A personal, growing knowledge base of findings, patterns, and templates for working effectively with Claude and Claude Code.',
+  head: [
+    ['link', { rel: 'icon', href: `${siteBase}favicon.svg`, type: 'image/svg+xml' }],
+    ['meta', { name: 'theme-color', content: '#5b4bdb' }],
+    ['meta', { name: 'application-name', content: 'Claude Playbook' }],
+    ['meta', { name: 'author', content: 'Qasim Ali' }],
+    ['meta', { name: 'robots', content: 'index, follow, max-image-preview:large' }],
+    ['meta', { property: 'og:site_name', content: 'Claude Playbook' }],
+    ['meta', { property: 'og:type', content: 'website' }],
+    ['meta', { property: 'og:image', content: socialImage }],
+    ['meta', { property: 'og:image:alt', content: 'Claude Playbook documentation site' }],
+    ['meta', { name: 'twitter:card', content: 'summary_large_image' }],
+    ['meta', { name: 'twitter:image', content: socialImage }]
+  ],
   srcDir: '.',
   // Served from https://qasimali-infinikorn.github.io/claude-playbook/ (a
   // project page, not a user/org root page or custom domain) — every asset
   // and route needs this prefix or the deployed site 404s on refresh/deep-link.
-  base: '/claude-playbook/',
+  base: siteBase,
   cleanUrls: true,
+  sitemap: {
+    hostname: siteUrl
+  },
+  transformHead({ page, title, description }) {
+    const url = canonicalUrl(page)
+    const tags: [string, Record<string, string>, string?][] = [
+      ['link', { rel: 'canonical', href: url }],
+      ['meta', { property: 'og:title', content: title }],
+      ['meta', { property: 'og:description', content: description }],
+      ['meta', { property: 'og:url', content: url }],
+      ['meta', { name: 'twitter:title', content: title }],
+      ['meta', { name: 'twitter:description', content: description }]
+    ]
+
+    if (url === siteUrl) {
+      tags.push([
+        'script',
+        { type: 'application/ld+json' },
+        JSON.stringify({
+          '@context': 'https://schema.org',
+          '@type': 'WebSite',
+          name: 'Claude Playbook',
+          url: siteUrl,
+          description
+        })
+      ])
+    }
+
+    return tags
+  },
   // Only the intentionally-excluded vendored files (see srcExclude) are
   // allowed to dead-link — everything else should be a real, resolvable page.
   ignoreDeadLinks: [/^\.\/skills\//, /^\.\/CLAUDE$/],
@@ -135,6 +192,7 @@ export default defineConfig({
           { text: 'Always-On Agent Operations', link: '/Always-On%20Agent%20Operations/' },
           { text: 'Eval-Driven Skill Improvement', link: '/Eval-Driven%20Skill%20Improvement/' },
           { text: 'Obsidian', link: '/Obsidian/' },
+          { text: 'Codebase Knowledge Graph', link: '/Codebase%20Knowledge%20Graph/' },
           { text: 'Agent Orchestration Terminology', link: '/Agent%20Orchestration%20Terminology/' },
           { text: 'Spec to Implementation', link: '/Spec%20to%20Implementation/' },
           { text: 'Verification Recipes', link: '/Verification%20Recipes/' },

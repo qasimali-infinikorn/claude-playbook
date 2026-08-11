@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://qasimali-infinikorn.github.io/claude-playbook/sitemap.xml

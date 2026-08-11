@@ -270,14 +270,17 @@ Capture provenance before synthesis:
 type: source
 source_id: src-2026-07-22-agent-orchestration
 title: Building Effective Agents
+description: Anthropic's taxonomy of agent workflows and when each applies.
 author: Anthropic
-source_url: https://www.anthropic.com/research/building-effective-agents
+resource: https://www.anthropic.com/research/building-effective-agents
 captured: 2026-07-22
 published:
 content_hash:
 ingest_status: captured
 ---
 ```
+
+`resource` is the canonical URI of the underlying asset. `ingest_status` tracks the state machine below and is deliberately distinct from `status`.
 
 A source packet should preserve enough original material or a stable reference to audit generated claims. Respect copyright and access restrictions: do not store or republish complete protected works merely because an agent can fetch them.
 
@@ -286,10 +289,14 @@ A source packet should preserve enough original material or a stable reference t
 ```yaml
 ---
 type: concept
-status: reviewed
+title: Orchestrator-Workers
+description: A lead model decomposes a task and delegates subtasks to workers.
+status: stable
 confidence: medium
 created: 2026-07-22
-updated: 2026-07-22
+generated: { by: claude-code/opus-5, at: 2026-07-22T14:10:00Z }
+verified:
+  - { by: human:qasim, at: 2026-07-22T16:40:00Z }
 sources:
   - "[[src-2026-07-22-agent-orchestration]]"
 related:
@@ -298,7 +305,28 @@ related:
 ---
 ```
 
+"Reviewed" is expressed by a `human:` entry in `verified`, not by a status value — that keeps *who checked this and when* auditable instead of collapsing it into one word. `confidence` is a local extension; unknown keys are safe to add.
+
 Every factual section should remain traceable to source notes. Label inference, disagreement, and personal conclusions rather than blending them into sourced fact.
+
+### Aligning with the Open Knowledge Format
+
+The property names above are not arbitrary. Google Cloud's [Open Knowledge Format (OKF)](https://github.com/GoogleCloudPlatform/knowledge-catalog/blob/main/okf/SPEC.md) (v0.1 announced June 2026) formalizes this exact pattern — a directory of Markdown files with YAML frontmatter, `type` the only required key, cross-links forming the graph — into a portable spec. Adopting its reserved names costs nothing and makes a vault readable by any OKF-aware tool:
+
+| Reserved field | Use in this vault |
+|---|---|
+| `type` | The only mandatory key; `source`, `concept`, `project`, `adr`, … |
+| `title` / `description` | Display name and one-sentence summary |
+| `resource` | Canonical URI of the underlying asset (the source URL, a repo path) |
+| `tags` | Topic tags, kept separate from provenance |
+| `sources` | Provenance entries |
+| `generated` / `verified` | Who produced this, and who confirmed it (`human:<id>`, `process:<id>`, `<agent>/<version>`) |
+| `status` | `draft` \| `stable` \| `deprecated` |
+| `stale_after` | Date after which the note should be re-checked |
+
+`index.md` and `log.md` are reserved filenames in OKF, matching this vault's index and ingest-log roles. Any other property — `confidence`, `ingest_status`, `owner` — remains valid; conformant consumers must tolerate unknown keys.
+
+The same format applied to a source tree, kept fresh by commit-triggered enrichment rather than manual ingestion, is covered in [`../Codebase Knowledge Graph/`](../Codebase%20Knowledge%20Graph/).
 
 ### Developer records
 
@@ -456,7 +484,39 @@ A vault with thousands of auto-generated pages and no reviewed reuse is content 
 7. Automate only stable, reversible stages.
 8. Keep external publishing and high-impact project decisions human-controlled.
 
-Related open implementations can be useful references, but audit them before installation. For example, [Ar9av/obsidian-wiki](https://github.com/Ar9av/obsidian-wiki) demonstrates a multi-agent-compatible skill surface, tiered retrieval, lint/status operations, and optional local semantic search. It is independent of the Medium article and should be evaluated as third-party software.
+### COG: a packaged agentic second brain
+
+[huytieu/COG-second-brain](https://github.com/huytieu/COG-second-brain) is an open-source, local-first implementation of a broader personal and team knowledge harness. The accompanying Medium article, [“The Second Brain That Refuses to Trust Itself”](https://medium.com/@qasimali7566675/the-second-brain-that-refuses-to-trust-itself-3867491172f6), explains the verification-first idea behind it. COG stands for **Cognition + Obsidian + Git**. It keeps Markdown as the durable store and adds an opinionated vault layout, agent instructions, reusable skills, specialist workers, read-only verifiers, Git-based history, and optional integrations.
+
+Its current structure maps closely to the architecture above:
+
+| COG surface | Role in the harness |
+|---|---|
+| `00-inbox/` and braindump/URL skills | Capture layer |
+| `01-daily/` through `05-knowledge/` | Daily records, projects, synthesized knowledge, and people profiles |
+| `06-templates/` | Stable record contracts |
+| `AGENTS.md`, `CLAUDE.md`, and agent-specific directories | Control and command surface |
+| Worker agents | Research, extraction, file operations, execution, and publishing |
+| Read-only verifiers and the `closed-loop` skill | Independent acceptance checks |
+| Git plus optional iCloud | Version history, recovery, and multi-device access |
+
+COG goes beyond a personal wiki. Its packaged workflows cover capture, daily and weekly synthesis, research, meeting processing, product-management artifacts, people CRM, publishing, and a V-model-inspired verification lifecycle. It provides native or documented surfaces for Claude Code, Cursor, Kiro, Gemini CLI, Codex, and other agents that can read Markdown.
+
+The most reusable design idea is **separating workers from verification**. A worker may create or update an artifact, but a verifier observes the resulting files against explicit acceptance criteria instead of accepting the worker's summary. This reduces self-review bias, although it does not make generated claims correct by itself; provenance checks and human approval are still required.
+
+Treat COG as a framework distribution, not as a drop-in folder to merge blindly into an existing vault. Before adoption:
+
+1. Test it in a fresh private repository or disposable vault.
+2. Review `AGENTS.md`, `CLAUDE.md`, skills, scripts, hooks, and integration permissions.
+3. Decide which folders may contain personal or company-confidential material.
+4. Enable Git remotes, iCloud, Slack, Linear, PostHog, Confluence, or Notion only after approving their data boundaries.
+5. Run its agent-surface validation and inspect the diff after onboarding or framework updates.
+6. Confirm that update rules preserve customized instructions and personal content in practice, with a backup available.
+7. Adopt only the workflows that solve measured retrieval or coordination problems; a 30-plus-skill surface creates governance and maintenance work of its own.
+
+COG and the schema-first design in this guide emphasize different strengths. COG provides a working operating system and multi-agent workflow; the schema here emphasizes portable note contracts, explicit source packets, OKF-compatible metadata, and a small staged rollout. They can be combined: borrow COG's lifecycle and verifier separation while retaining stricter provenance fields and immutable source boundaries.
+
+Related open implementations can be useful references, but audit them before installation. [Ar9av/obsidian-wiki](https://github.com/Ar9av/obsidian-wiki) demonstrates a narrower multi-agent-compatible wiki skill surface, tiered retrieval, lint/status operations, and optional local semantic search. Both projects are independent of the Medium article and should be evaluated as third-party software.
 
 ---
 
@@ -586,9 +646,11 @@ Do not combine renaming, metadata migration, summarization, and folder reorganiz
 - [Obsidian properties](https://obsidian.md/help/properties)
 - [Obsidian Sync version history](https://obsidian.md/help/sync/version-history)
 - [Official Obsidian Help repository](https://github.com/obsidianmd/obsidian-help)
+- [Open Knowledge Format specification](https://github.com/GoogleCloudPlatform/knowledge-catalog/blob/main/okf/SPEC.md)
 
 ## See Also
 
+- [`../Codebase Knowledge Graph/`](../Codebase%20Knowledge%20Graph/)
 - [`../Memory and Context/`](../Memory%20and%20Context/)
 - [`../Security Guardrails/`](../Security%20Guardrails/)
 - [`../Git and PR Workflow/`](../Git%20and%20PR%20Workflow/)

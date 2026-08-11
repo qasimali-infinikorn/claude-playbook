@@ -127,6 +127,7 @@ Add `.claude/logs/` to `.gitignore` unless logs are intentionally reviewed.
 ## See Also
 
 - [`../Claude Directory Layout/`](../Claude%20Directory%20Layout/)
+- [`../Codebase Knowledge Graph/`](../Codebase%20Knowledge%20Graph/)
 - [`../Security Guardrails/`](../Security%20Guardrails/)
 - [`../Harness/`](../Harness/)
 - [Claude Code hooks docs](https://code.claude.com/docs/en/hooks)
